@@ -63,7 +63,7 @@ Tuvung_NguPhap/
 ├── styles.css         # Thiết kế CSS & Biến giao diện (Sáng/Tối)
 ├── app.js             # Logic xử lý (Vẽ sơ đồ, Flashcard, Quiz, Trạng thái)
 ├── vocab_data.json    # Cơ sở dữ liệu từ vựng (Unit 4 - Unit 7)
-├── server.js          # Máy chủ Node.js tĩnh siêu nhẹ để chạy cục bộ
+├── local-server.js    # Máy chủ Node.js tĩnh siêu nhẹ để chạy cục bộ
 ├── powershell.cmd     # Script proxy bổ trợ đường dẫn trên Windows
 └── README.md          # Hướng dẫn sử dụng dự án
 ```
@@ -74,11 +74,11 @@ Tuvung_NguPhap/
 
 Ứng dụng hoàn toàn chạy bằng client-side nên không yêu cầu cài đặt cơ sở dữ liệu phức tạp. Để chạy ứng dụng mượt mà không gặp lỗi bảo mật CORS khi nạp file dữ liệu JSON, bạn hãy chạy qua một server tĩnh đơn giản:
 
-### Cách 1: Sử dụng file `server.js` chạy bằng Node.js (Khuyên dùng)
+### Cách 1: Sử dụng tệp `local-server.js` chạy bằng Node.js (Khuyên dùng)
 1. Đảm bảo máy tính của bạn đã được cài đặt **Node.js**.
 2. Mở Terminal (PowerShell hoặc Command Prompt) tại thư mục dự án:
    ```bash
-   node server.js
+   node local-server.js
    ```
 3. Mở trình duyệt và truy cập:
    👉 **http://localhost:3000**
