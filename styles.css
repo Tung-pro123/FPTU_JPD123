@@ -1694,3 +1694,256 @@ body.light-theme .theme-toggle-btn i {
     color: var(--accent-purple);
 }
 
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Header Stack Layout */
+    .app-header {
+        height: auto;
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .header-logo {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .search-container {
+        width: 100%;
+        order: 3;
+    }
+    
+    .unit-selector-container {
+        width: 100%;
+        justify-content: space-between;
+        order: 2;
+    }
+    
+    .select-wrapper {
+        flex: 1;
+    }
+    
+    #unit-select {
+        width: 100%;
+    }
+    
+    /* Workspace Layout Shift (Bottom Nav) */
+    .app-workspace {
+        flex-direction: column-reverse;
+    }
+    
+    .sidebar-nav {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-top: 1px solid var(--panel-border);
+        padding: 8px 12px;
+        background: rgba(11, 17, 32, 0.9);
+    }
+    
+    .nav-menu {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        gap: 4px;
+    }
+    
+    .nav-item {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 6px;
+        font-size: 10px;
+        font-weight: 600;
+        flex: 1;
+        text-align: center;
+        border-left: none;
+        border-radius: 8px;
+    }
+    
+    .nav-item.active {
+        border-left: none;
+        background: rgba(56, 189, 248, 0.08);
+        border-top: 2px solid var(--primary);
+        border-radius: 0 0 8px 8px;
+    }
+    
+    .nav-item i {
+        font-size: 14px;
+    }
+    
+    /* Hide sidebar stats on mobile to save space */
+    .stats-dashboard {
+        display: none;
+    }
+    
+    /* Mindmap Canvas Adjustments */
+    .canvas-controls {
+        bottom: 80px;
+        left: 12px;
+        padding: 4px 8px;
+    }
+    
+    .canvas-controls button {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+    
+    #zoom-indicator {
+        bottom: 86px;
+        left: 235px;
+    }
+    
+    .drag-hint {
+        display: none; /* Hide drag text on mobile to avoid clutter */
+    }
+    
+    /* Bottom Sheet Detail Panel on Mobile */
+    .word-detail-panel {
+        width: 100%;
+        height: 55vh;
+        bottom: -60vh;
+        right: 0;
+        top: auto;
+        border-radius: 20px 20px 0 0;
+        border-left: none;
+        border-top: 1.5px solid var(--panel-border);
+        transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 20px;
+        z-index: 999;
+    }
+    
+    .word-detail-panel.open {
+        bottom: 0;
+        right: 0;
+    }
+    
+    .close-detail-btn {
+        top: 14px;
+        right: 14px;
+    }
+    
+    /* Flashcards Responsive */
+    .flashcards-wrapper {
+        padding: 12px;
+        justify-content: flex-start;
+    }
+    
+    .flashcard-deck {
+        height: 250px;
+        margin-bottom: 16px;
+    }
+    
+    .card-front, .card-back {
+        padding: 20px;
+    }
+    
+    .kanji-text {
+        font-size: 32px;
+    }
+    
+    .kana-text {
+        font-size: 16px;
+    }
+    
+    .meaning-display h3 {
+        font-size: 22px;
+    }
+    
+    .flashcard-actions {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+    
+    .flashcard-actions .glass-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 8px 16px;
+    }
+    
+    .learning-status-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .status-action-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 6px;
+        font-size: 11px;
+    }
+    
+    .flashcard-extra-options {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .flashcard-extra-options button {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    /* Quiz Responsive */
+    .quiz-container {
+        padding: 16px 12px;
+    }
+    
+    .quiz-panel-section {
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .quiz-question-text {
+        font-size: 22px;
+    }
+    
+    .quiz-answers-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .option-btn {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    /* Word List Table Responsive */
+    .word-list-wrapper {
+        padding: 12px;
+    }
+    
+    .list-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 10px 14px;
+    }
+    
+    .list-filter-group {
+        justify-content: space-between;
+    }
+    
+    .list-total-info {
+        text-align: right;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Hide redundant columns on small screens to fit the table */
+    .word-table th:nth-child(1), .word-table td:nth-child(1),
+    .word-table th:nth-child(2), .word-table td:nth-child(2) {
+        display: none;
+    }
+    
+    .word-table th, .word-table td {
+        padding: 10px 12px;
+        font-size: 12.5px;
+    }
+}
+
