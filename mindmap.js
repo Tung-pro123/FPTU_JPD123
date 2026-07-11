@@ -361,8 +361,9 @@ function setupEventListeners() {
     });
     
     document.getElementById("card-tts-btn").addEventListener("click", () => {
-        const wordText = document.getElementById("card-kana").textContent;
-        speakJapanese(wordText);
+        if (flashcardWords.length > 0 && flashcardWords[cardIndex]) {
+            speakJapanese(flashcardWords[cardIndex].word.kana);
+        }
     });
 
     document.getElementById("card-prev-btn").addEventListener("click", prevFlashcard);
