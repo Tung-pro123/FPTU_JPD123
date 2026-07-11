@@ -61,7 +61,7 @@
 Tuvung_NguPhap/
 ├── index.html         # Giao diện chính của ứng dụng
 ├── styles.css         # Thiết kế CSS & Biến giao diện (Sáng/Tối)
-├── app.js             # Logic xử lý (Vẽ sơ đồ, Flashcard, Quiz, Trạng thái)
+├── mindmap.js         # Logic xử lý (Vẽ sơ đồ, Flashcard, Quiz, Trạng thái)
 ├── vocab_data.json    # Cơ sở dữ liệu từ vựng (Unit 4 - Unit 7)
 ├── local-server.js    # Máy chủ Node.js tĩnh siêu nhẹ để chạy cục bộ
 ├── powershell.cmd     # Script proxy bổ trợ đường dẫn trên Windows
