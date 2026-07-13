@@ -1698,6 +1698,13 @@ body.light-theme .theme-toggle-btn i {
    RESPONSIVE DESIGN (MOBILE & TABLET)
    ========================================================================== */
 @media (max-width: 768px) {
+    /* Enable smooth scrolling on document-style tab panels */
+    #flashcard-tab, #quiz-tab, #list-tab {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        height: 100%;
+    }
+
     /* Header Stack Layout */
     .app-header {
         height: auto;
@@ -1832,6 +1839,8 @@ body.light-theme .theme-toggle-btn i {
     .flashcards-wrapper {
         padding: 12px;
         justify-content: flex-start;
+        height: auto;
+        min-height: 100%;
     }
     
     .flashcard-deck {
@@ -1892,6 +1901,8 @@ body.light-theme .theme-toggle-btn i {
     /* Quiz Responsive */
     .quiz-container {
         padding: 16px 12px;
+        height: auto;
+        min-height: 100%;
     }
     
     .quiz-panel-section {
@@ -1916,6 +1927,12 @@ body.light-theme .theme-toggle-btn i {
     /* Word List Table Responsive */
     .word-list-wrapper {
         padding: 12px;
+        height: auto;
+    }
+    
+    .word-table-container {
+        height: auto;
+        overflow-y: visible;
     }
     
     .list-controls {
