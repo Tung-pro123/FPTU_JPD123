@@ -346,11 +346,14 @@ function setupEventListeners() {
         }
     }, { passive: true });
     svgElement.addEventListener("touchmove", (e) => {
-        if (e.touches.length === 1) {
+        if (e.touches.length === 1 && isPanning) {
             const touch = e.touches[0];
             drag({ clientX: touch.clientX, clientY: touch.clientY });
+            if (e.cancelable) {
+                e.preventDefault(); // Stop mobile browser scrolling while dragging the canvas
+            }
         }
-    }, { passive: true });
+    }, { passive: false });
     svgElement.addEventListener("touchend", endDrag);
 
     // Flashcard UI Handlers
