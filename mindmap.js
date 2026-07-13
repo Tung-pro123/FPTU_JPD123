@@ -423,6 +423,13 @@ function switchToTab(tabId) {
 // VIEW CONTROLLER
 // ==========================================================================
 function renderCurrentTab() {
+    // Toggle body class for mindmap active state (to control scroll behavior on mobile)
+    if (currentTab === "mindmap-tab") {
+        document.body.classList.add("mindmap-active");
+    } else {
+        document.body.classList.remove("mindmap-active");
+    }
+
     if (currentTab === "mindmap-tab") {
         renderMindmap();
     } else if (currentTab === "flashcard-tab") {

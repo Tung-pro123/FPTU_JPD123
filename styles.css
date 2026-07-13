@@ -1698,58 +1698,44 @@ body.light-theme .theme-toggle-btn i {
    RESPONSIVE DESIGN (MOBILE & TABLET)
    ========================================================================== */
 @media (max-width: 768px) {
-    /* Enable smooth scrolling on document-style tab panels */
-    #flashcard-tab, #quiz-tab, #list-tab {
+    /* Let the body and app-container scroll naturally on mobile */
+    body {
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        height: 100%;
-    }
-
-    /* Header Stack Layout */
-    .app-header {
         height: auto;
-        padding: 12px 16px;
-        flex-direction: column;
-        gap: 10px;
-        align-items: stretch;
     }
     
-    .header-logo {
-        width: 100%;
-        justify-content: space-between;
+    .app-container {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: visible;
     }
     
-    .search-container {
-        width: 100%;
-        order: 3;
+    .app-header {
+        position: static;
+        height: auto;
     }
     
-    .unit-selector-container {
-        width: 100%;
-        justify-content: space-between;
-        order: 2;
-    }
-    
-    .select-wrapper {
-        flex: 1;
-    }
-    
-    #unit-select {
-        width: 100%;
-    }
-    
-    /* Workspace Layout Shift (Bottom Nav) */
     .app-workspace {
         flex-direction: column-reverse;
+        height: auto;
+        min-height: calc(100vh - 120px);
+        overflow: visible;
+        margin-bottom: 60px; /* space for fixed bottom nav bar */
     }
     
     .sidebar-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
         width: 100%;
-        height: auto;
+        height: 60px;
         border-right: none;
         border-top: 1px solid var(--panel-border);
         padding: 8px 12px;
-        background: rgba(11, 17, 32, 0.9);
+        background: rgba(11, 17, 32, 0.95);
+        backdrop-filter: var(--glass-blur);
+        z-index: 1000;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
     }
     
     .nav-menu {
@@ -1786,6 +1772,83 @@ body.light-theme .theme-toggle-btn i {
     /* Hide sidebar stats on mobile to save space */
     .stats-dashboard {
         display: none;
+    }
+    
+    .content-view {
+        height: auto;
+        overflow: visible;
+        flex: none;
+        width: 100%;
+    }
+    
+    .tab-panel {
+        height: auto;
+        overflow: visible;
+    }
+
+    #flashcard-tab, #quiz-tab, #list-tab {
+        overflow-y: visible;
+        height: auto;
+    }
+
+    /* Lock body height ONLY when mindmap is active */
+    body.mindmap-active {
+        overflow: hidden;
+        height: 100vh;
+    }
+    
+    body.mindmap-active .app-container {
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    body.mindmap-active .app-workspace {
+        height: calc(100vh - 120px);
+        overflow: hidden;
+        margin-bottom: 60px;
+    }
+    
+    body.mindmap-active .content-view {
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    body.mindmap-active #mindmap-tab {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* Header Stack Layout */
+    .app-header {
+        height: auto;
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .header-logo {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .search-container {
+        width: 100%;
+        order: 3;
+    }
+    
+    .unit-selector-container {
+        width: 100%;
+        justify-content: space-between;
+        order: 2;
+    }
+    
+    .select-wrapper {
+        flex: 1;
+    }
+    
+    #unit-select {
+        width: 100%;
     }
     
     /* Mindmap Canvas Adjustments */
@@ -1898,30 +1961,52 @@ body.light-theme .theme-toggle-btn i {
         justify-content: center;
     }
     
-    /* Quiz Responsive */
+    /* Quiz Responsive - COMPACT MODE */
     .quiz-container {
-        padding: 16px 12px;
+        padding: 8px 6px;
         height: auto;
         min-height: 100%;
     }
     
     .quiz-panel-section {
-        padding: 20px;
-        gap: 16px;
+        padding: 12px;
+        gap: 12px;
+        border-radius: 12px;
+    }
+    
+    .quiz-header {
+        font-size: 12px;
+    }
+    
+    .quiz-question-card {
+        padding: 12px 16px;
     }
     
     .quiz-question-text {
-        font-size: 22px;
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+    
+    .quiz-question-card .tts-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 10px;
     }
     
     .quiz-answers-grid {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 6px;
     }
     
     .option-btn {
-        padding: 12px;
-        font-size: 13px;
+        padding: 10px;
+        font-size: 12.5px;
+    }
+    
+    .quiz-feedback-banner {
+        padding: 8px 12px;
+        margin-top: 6px;
+        border-radius: 8px;
     }
     
     /* Word List Table Responsive */
