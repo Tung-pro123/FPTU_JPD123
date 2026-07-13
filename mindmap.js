@@ -576,13 +576,13 @@ function renderMindmap() {
     // Render Nodes (using foreignObject for rich CSS capability)
     layout.nodes.forEach(node => {
         const fObject = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-        fObject.setAttribute("x", node.x - node.width / 2);
-        fObject.setAttribute("y", node.y - node.height / 2);
         fObject.setAttribute("width", node.width);
         fObject.setAttribute("height", node.height);
+        // Safari/WebKit workaround: Use transform instead of x/y attributes for foreignObject positioning
+        fObject.setAttribute("transform", `translate(${node.x - node.width / 2}, ${node.y - node.height / 2})`);
         
-        // Create HTML node wrapper
-        const div = document.createElement("div");
+        // Create HTML node wrapper (using XHTML namespace for iOS Safari compatibility)
+        const div = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
         
         if (node.type === "root") {
             div.className = "node-body node-root";
