@@ -88,6 +88,10 @@
                         <i class="fa-solid fa-list-check"></i>
                         <span>Danh sách từ</span>
                     </button>
+                    <button class="nav-item" data-tab="grammar-tab">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>Ngữ pháp</span>
+                    </button>
                 </nav>
 
                 <!-- Detailed Stats Dashboard Panel -->
@@ -388,6 +392,31 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 5. GRAMMAR REVIEW VIEW -->
+                <div id="grammar-tab" class="tab-panel">
+                    <div class="grammar-wrapper">
+                        <div class="grammar-header">
+                            <div class="grammar-title-area">
+                                <i class="fa-solid fa-book-open"></i>
+                                <h2>Cẩm nang Ngữ pháp</h2>
+                            </div>
+                            <div class="grammar-filter">
+                                <label for="grammar-unit-filter">Lọc theo bài:</label>
+                                <select id="grammar-unit-filter">
+                                    <option value="all">Tất cả Unit</option>
+                                    <option value="Unit 4">Unit 4</option>
+                                    <option value="Unit 5">Unit 5</option>
+                                    <option value="Unit 6">Unit 6</option>
+                                    <option value="Unit 7">Unit 7</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="grammar-content" class="grammar-content">
+                            <!-- Dynamically populated by JS -->
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
@@ -396,6 +425,7 @@
     <div id="toast-container"></div>
 
     <!-- Script loading -->
+    <script src="grammar_data.js"></script>
     <script src="mindmap.js"></script>
 </body>
 </html>

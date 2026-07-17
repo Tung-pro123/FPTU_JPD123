@@ -411,6 +411,11 @@ function setupEventListeners() {
         filterWordList(query);
     });
 
+    // Grammar Unit Filter
+    document.getElementById("grammar-unit-filter").addEventListener("change", () => {
+        renderGrammar();
+    });
+
     // Theme Toggle Handler
     document.getElementById("theme-toggle-btn").addEventListener("click", toggleTheme);
 }
@@ -447,7 +452,159 @@ function renderCurrentTab() {
     } else if (currentTab === "list-tab") {
         const query = document.getElementById("global-search").value.trim().toLowerCase();
         filterWordList(query);
+    } else if (currentTab === "grammar-tab") {
+        renderGrammar();
     }
+}
+
+// ==========================================================================
+// GRAMMAR RENDERING ENGINE
+// ==========================================================================
+function renderGrammar() {
+    const container = document.getElementById("grammar-content");
+    const filterValue = document.getElementById("grammar-unit-filter").value;
+
+    // Filter data
+    const units = filterValue === "all"
+        ? GRAMMAR_DATA
+        : GRAMMAR_DATA.filter(u => u.unit === filterValue);
+
+    if (units.length === 0) {
+        container.innerHTML = `<div class="grammar-empty"><i class="fa-solid fa-book-open"></i><p>Không tìm thấy dữ liệu ngữ pháp.</p></div>`;
+        return;
+    }
+
+    let html = '';
+
+    units.forEach(unitData => {
+        html += `<div class="grammar-unit-group">`;
+        html += `<div class="grammar-unit-header">`;
+        html += `<i class="fa-solid ${unitData.icon}"></i>`;
+        html += `<h3>📖 ${unitData.unit}: ${unitData.title}</h3>`;
+        html += `</div>`;
+
+        unitData.sections.forEach((section, sIdx) => {
+            const sectionId = `grammar-${unitData.unit.replace(/\s/g, '')}-${sIdx}`;
+            html += `<div class="grammar-item">`;
+            html += `<button class="grammar-item-toggle" data-target="${sectionId}">`;
+            html += `<span class="grammar-item-number">${sIdx + 1}</span>`;
+            html += `<span class="grammar-item-title">${section.title}</span>`;
+            html += `<i class="fa-solid fa-chevron-down grammar-chevron"></i>`;
+            html += `</button>`;
+            html += `<div class="grammar-item-body" id="${sectionId}">`;
+
+            // Structures / Formulas
+            if (section.structures && section.structures.length > 0) {
+                section.structures.forEach(s => {
+                    html += `<div class="grammar-formula-box">`;
+                    html += `<div class="grammar-formula-text">${highlightGrammarFormula(s.formula)}</div>`;
+                    if (s.explanation) {
+                        html += `<div class="grammar-formula-explain">${s.explanation}</div>`;
+                    }
+                    html += `</div>`;
+                });
+            }
+
+            // Tables
+            if (section.tables && section.tables.length > 0) {
+                section.tables.forEach(tbl => {
+                    html += `<div class="grammar-table-wrapper">`;
+                    if (tbl.caption) {
+                        html += `<div class="grammar-table-caption">${tbl.caption}</div>`;
+                    }
+                    html += `<table class="grammar-table">`;
+                    html += `<thead><tr>`;
+                    tbl.headers.forEach(h => {
+                        html += `<th>${h}</th>`;
+                    });
+                    html += `</tr></thead>`;
+                    html += `<tbody>`;
+                    tbl.rows.forEach(row => {
+                        html += `<tr>`;
+                        row.forEach(cell => {
+                            html += `<td>${highlightJapanese(cell)}</td>`;
+                        });
+                        html += `</tr>`;
+                    });
+                    html += `</tbody></table>`;
+                    html += `</div>`;
+                });
+            }
+
+            // Examples
+            if (section.examples && section.examples.length > 0) {
+                html += `<div class="grammar-examples">`;
+                html += `<div class="grammar-examples-label"><i class="fa-solid fa-lightbulb"></i> Ví dụ:</div>`;
+                section.examples.forEach(ex => {
+                    html += `<div class="grammar-example-item">`;
+                    html += `<span class="grammar-ex-jp">${ex.jp}</span>`;
+                    html += `<span class="grammar-ex-arrow">→</span>`;
+                    html += `<span class="grammar-ex-vi">${ex.vi}</span>`;
+                    html += `</div>`;
+                });
+                html += `</div>`;
+            }
+
+            // Notes
+            if (section.notes && section.notes.length > 0) {
+                section.notes.forEach(note => {
+                    const isWarning = note.startsWith('⚠️');
+                    const isTip = note.startsWith('💡');
+                    const noteClass = isWarning ? 'warning' : (isTip ? 'tip' : 'info');
+                    const noteIcon = isWarning ? 'fa-triangle-exclamation' : (isTip ? 'fa-lightbulb' : 'fa-circle-info');
+                    html += `<div class="grammar-note ${noteClass}">`;
+                    html += `<i class="fa-solid ${noteIcon}"></i>`;
+                    html += `<span>${note.replace(/^[⚠️💡]\s*/, '')}</span>`;
+                    html += `</div>`;
+                });
+            }
+
+            html += `</div>`; // grammar-item-body
+            html += `</div>`; // grammar-item
+        });
+
+        html += `</div>`; // grammar-unit-group
+    });
+
+    container.innerHTML = html;
+
+    // Attach accordion toggle events
+    container.querySelectorAll('.grammar-item-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-target');
+            const body = document.getElementById(targetId);
+            const chevron = btn.querySelector('.grammar-chevron');
+            const isOpen = body.classList.contains('open');
+
+            if (isOpen) {
+                body.classList.remove('open');
+                chevron.classList.remove('rotated');
+            } else {
+                body.classList.add('open');
+                chevron.classList.add('rotated');
+            }
+        });
+    });
+
+    // Auto-expand all sections on first render
+    container.querySelectorAll('.grammar-item-body').forEach(body => {
+        body.classList.add('open');
+    });
+    container.querySelectorAll('.grammar-chevron').forEach(chevron => {
+        chevron.classList.add('rotated');
+    });
+}
+
+function highlightGrammarFormula(text) {
+    // Highlight Japanese characters in formulas with a special class
+    return text.replace(/([\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf]+)/g,
+        '<span class="grammar-jp-highlight">$1</span>');
+}
+
+function highlightJapanese(text) {
+    // Lighter highlight for table cells
+    return text.replace(/([\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf]+)/g,
+        '<span class="grammar-jp-inline">$1</span>');
 }
 
 // ==========================================================================
