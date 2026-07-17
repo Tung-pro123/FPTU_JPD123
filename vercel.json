@@ -1,8 +1,0 @@
-{
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "styles.css", "use": "@vercel/static" },
-    { "src": "mindmap.js", "use": "@vercel/static" },
-    { "src": "vocab_data.json", "use": "@vercel/static" }
-  ]
-}
