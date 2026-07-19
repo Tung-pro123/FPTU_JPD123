@@ -1942,6 +1942,81 @@
             "meaning": "cái ~ nào? (đi kèm danh từ)"
           }
         ]
+      },
+      {
+        "name": "8. Thời gian & Phân chia (Time & Fractions)",
+        "words": [
+          {
+            "word": "一時半 (いちじはん)",
+            "kana": "いちじはん",
+            "kanji": "一時半",
+            "meaning": "1 giờ rưỡi"
+          },
+          {
+            "word": "半日 (はんにち / はんじつ)",
+            "kana": "はんにち",
+            "kanji": "半日",
+            "meaning": "nửa ngày"
+          },
+          {
+            "word": "半月 (はんつき)",
+            "kana": "はんつき",
+            "kanji": "半月",
+            "meaning": "nửa tháng"
+          },
+          {
+            "word": "半年 (はんとし)",
+            "kana": "はんとし",
+            "kanji": "半年",
+            "meaning": "nửa năm"
+          },
+          {
+            "word": "半分 (はんぶん)",
+            "kana": "はんぶん",
+            "kanji": "半分",
+            "meaning": "một nửa"
+          }
+        ]
+      },
+      {
+        "name": "9. Giáo dục & Con người (Education & People)",
+        "words": [
+          {
+            "word": "大学 (だいがく)",
+            "kana": "だいがく",
+            "kanji": "大学",
+            "meaning": "trường đại học"
+          },
+          {
+            "word": "小学校 (しょうがっこう)",
+            "kana": "しょうがっこう",
+            "kanji": "小学校",
+            "meaning": "trường tiểu học"
+          },
+          {
+            "word": "大人 (おとな)",
+            "kana": "おとな",
+            "kanji": "大人",
+            "meaning": "người lớn"
+          },
+          {
+            "word": "小人 (しょうじん)",
+            "kana": "しょうじん",
+            "kanji": "小人",
+            "meaning": "người lùn / tiểu nhân"
+          }
+        ]
+      },
+      {
+        "name": "10. Thực phẩm (Food)",
+        "words": [
+          {
+            "word": "野菜 (やさい)",
+            "kana": "やさい",
+            "kanji": "野菜",
+            "meaning": "rau, rau củ"
+          }
+        ]
       }
     ]
   }
