@@ -483,12 +483,16 @@ const GRAMMAR_DATA = [
                 title: "Động từ Thể て (Te-form)",
                 structures: [
                     {
-                        formula: "Nhóm 1: Chia theo đuôi ます (xem bảng bên dưới)",
-                        explanation: "Động từ nhóm 1 có nhiều quy tắc chia thể て."
+                        formula: "Cách nhận biết 3 Nhóm Động từ",
+                        explanation: "• Nhóm 1: Trước ます là âm thuộc cột い (い, き, ぎ, し, ち, に, び, み, り).<br>• Nhóm 2: Trước ます là âm thuộc cột え (え, け, せ, て...) và một số từ đặc biệt cột い (みます, おきます, かります, おります, あびます).<br>• Nhóm 3: します (làm), きます (đến) và N + します (勉強します, 買い物します...)."
                     },
                     {
-                        formula: "Nhóm 2 và 3: V(bỏ ます) → て",
-                        explanation: "Chỉ cần bỏ ます rồi thêm て."
+                        formula: "Chia Thể て - Nhóm 1",
+                        explanation: "Có nhiều quy tắc chia thể て tùy theo âm cuối trước ます (xem bảng chi tiết bên dưới)."
+                    },
+                    {
+                        formula: "Chia Thể て - Nhóm 2 và 3",
+                        explanation: "Rất đơn giản: Chỉ cần bỏ ます rồi thêm て vào."
                     }
                 ],
                 examples: [],
