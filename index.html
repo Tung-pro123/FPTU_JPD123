@@ -96,6 +96,10 @@
                         <i class="fa-solid fa-font"></i>
                         <span>Luyện Kanji</span>
                     </button>
+                    <button class="nav-item" data-tab="speaking-tab">
+                        <i class="fa-solid fa-microphone"></i>
+                        <span>Luyện Speaking</span>
+                    </button>
                 </nav>
 
                 <!-- Detailed Stats Dashboard Panel -->
@@ -527,6 +531,38 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 7. SPEAKING PRACTICE VIEW -->
+                <div id="speaking-tab" class="tab-panel">
+                    <div class="speaking-wrapper">
+                        <!-- Speaking Header -->
+                        <div class="speaking-header">
+                            <div class="speaking-title-area">
+                                <i class="fa-solid fa-microphone"></i>
+                                <h2>Luyện Speaking (18 Đề Thi SPR26)</h2>
+                            </div>
+                            <div class="speaking-filter-group">
+                                <label for="speaking-topic-select">Chọn Bộ Đề:</label>
+                                <select id="speaking-topic-select">
+                                    <!-- Options generated dynamically -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Speaking Practice Content -->
+                        <div class="speaking-content-container">
+                            <div class="speaking-topic-banner" id="speaking-topic-banner">
+                                <span class="speaking-badge" id="speaking-topic-badge">Đề 1</span>
+                                <h3 id="speaking-topic-title">Đề 1: Sự kiện & Thói quen ăn uống</h3>
+                            </div>
+
+                            <!-- List of Question/Answer cards in current topic -->
+                            <div class="speaking-cards-list" id="speaking-cards-list">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
@@ -536,6 +572,7 @@
 
     <!-- Script loading -->
     <script src="grammar_data.js"></script>
+    <script src="speaking_data.js"></script>
     <script src="mindmap.js"></script>
 </body>
 </html>

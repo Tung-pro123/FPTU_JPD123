@@ -2875,3 +2875,218 @@ body.light-theme .theme-toggle-btn i {
     }
 }
 
+/* ==========================================================================
+   7. SPEAKING PRACTICE TAB STYLES
+   ========================================================================== */
+
+.speaking-wrapper {
+    padding: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.speaking-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.speaking-title-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.speaking-title-area i {
+    font-size: 1.6rem;
+    background: linear-gradient(135deg, #ec4899, #ef4444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.speaking-title-area h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.speaking-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.speaking-filter-group label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.speaking-filter-group select {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--panel-border);
+    background: var(--input-bg);
+    color: var(--text-light);
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.speaking-topic-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(239, 68, 68, 0.08));
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    backdrop-filter: var(--glass-blur);
+    margin-bottom: 24px;
+}
+
+.speaking-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(236, 72, 153, 0.2);
+    color: #ec4899;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    white-space: nowrap;
+}
+
+.speaking-topic-banner h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.speaking-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.speaking-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: var(--glass-blur);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.speaking-card-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ec4899, #ef4444);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.speaking-box {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.speaking-q-box {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(99, 102, 241, 0.05));
+    border-left: 4px solid var(--primary);
+}
+
+.speaking-a-box {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.05));
+    border-left: 4px solid var(--status-done-color);
+}
+
+.speaking-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.speaking-role-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.speaking-q-box .speaking-role-label {
+    color: var(--primary);
+}
+
+.speaking-a-box .speaking-role-label {
+    color: var(--status-done-color);
+}
+
+.speaking-jp-text {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.speaking-vi-text {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.speaking-tip-box {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: var(--status-learning-color);
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .speaking-wrapper {
+        padding: 16px 12px;
+    }
+
+    .speaking-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .speaking-filter-group {
+        width: 100%;
+    }
+
+    .speaking-filter-group select {
+        flex: 1;
+    }
+
+    .speaking-card {
+        padding: 14px;
+    }
+
+    .speaking-jp-text {
+        font-size: 1rem;
+    }
+}
+
+

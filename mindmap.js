@@ -456,6 +456,8 @@ function renderCurrentTab() {
         renderGrammar();
     } else if (currentTab === "kanji-tab") {
         initKanjiPractice();
+    } else if (currentTab === "speaking-tab") {
+        initSpeakingPractice();
     }
 }
 
@@ -2082,4 +2084,104 @@ function renderKanjiGrid() {
         container.appendChild(card);
     });
 }
+
+// ==========================================================================
+// SPEAKING PRACTICE ENGINE
+// ==========================================================================
+let currentSpeakingTopicId = 1;
+let speakingEventsInitialized = false;
+
+function initSpeakingPractice() {
+    populateSpeakingTopics();
+    setupSpeakingEventListenersOnce();
+    renderSpeakingTopic();
+}
+
+function populateSpeakingTopics() {
+    const select = document.getElementById("speaking-topic-select");
+    if (!select) return;
+
+    if (select.children.length === 0 && typeof SPEAKING_DATA !== "undefined") {
+        SPEAKING_DATA.forEach(topic => {
+            const opt = document.createElement("option");
+            opt.value = topic.id;
+            opt.textContent = topic.title;
+            select.appendChild(opt);
+        });
+    }
+}
+
+function setupSpeakingEventListenersOnce() {
+    if (speakingEventsInitialized) return;
+    speakingEventsInitialized = true;
+
+    const select = document.getElementById("speaking-topic-select");
+    if (select) {
+        select.addEventListener("change", (e) => {
+            currentSpeakingTopicId = parseInt(e.target.value);
+            renderSpeakingTopic();
+        });
+    }
+}
+
+function renderSpeakingTopic() {
+    if (typeof SPEAKING_DATA === "undefined") return;
+
+    const topic = SPEAKING_DATA.find(t => t.id === currentSpeakingTopicId) || SPEAKING_DATA[0];
+    
+    document.getElementById("speaking-topic-badge").textContent = `Đề ${topic.id}`;
+    document.getElementById("speaking-topic-title").textContent = topic.title;
+
+    const listContainer = document.getElementById("speaking-cards-list");
+    if (!listContainer) return;
+
+    listContainer.innerHTML = "";
+
+    topic.questions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "speaking-card";
+        card.innerHTML = `
+            <div class="speaking-card-num">Câu ${idx + 1}</div>
+            
+            <!-- Question Box (Giám khảo) -->
+            <div class="speaking-box speaking-q-box">
+                <div class="speaking-box-header">
+                    <span class="speaking-role-label"><i class="fa-solid fa-circle-question"></i> Câu hỏi (Giám khảo)</span>
+                    <button class="table-row-tts-btn q-tts-btn" title="Nghe câu hỏi">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                </div>
+                <div class="speaking-jp-text">${q.qJp}</div>
+                <div class="speaking-vi-text">Ý nghĩa: ${q.qVi}</div>
+            </div>
+
+            <!-- Answer Box (Thí sinh) -->
+            <div class="speaking-box speaking-a-box">
+                <div class="speaking-box-header">
+                    <span class="speaking-role-label"><i class="fa-solid fa-comment-dots"></i> Câu trả lời gợi ý (Thí sinh)</span>
+                    <button class="table-row-tts-btn a-tts-btn" title="Nghe câu trả lời">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                </div>
+                <div class="speaking-jp-text">${q.aJp}</div>
+                <div class="speaking-vi-text">Ý nghĩa: ${q.aVi}</div>
+            </div>
+
+            <!-- Tip Box -->
+            ${q.tip ? `<div class="speaking-tip-box">${q.tip}</div>` : ''}
+        `;
+
+        // Bind TTS listeners
+        card.querySelector(".q-tts-btn").addEventListener("click", () => {
+            speakJapanese(q.qJp);
+        });
+
+        card.querySelector(".a-tts-btn").addEventListener("click", () => {
+            speakJapanese(q.aJp);
+        });
+
+        listContainer.appendChild(card);
+    });
+}
+
 
