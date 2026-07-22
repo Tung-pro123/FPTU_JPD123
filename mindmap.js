@@ -1803,11 +1803,13 @@ function shuffleArray(arr) {
 
 function getFilteredKanjiWords() {
     let list = [];
+    // Regex matching CJK Kanji characters
+    const kanjiRegex = /[\u4e00-\u9faf\u3400-\u4dbf]/;
     vocabData.forEach(uObj => {
         if (kanjiUnitFilter === "all" || uObj.unit === kanjiUnitFilter) {
             uObj.categories.forEach(cat => {
                 cat.words.forEach(w => {
-                    if (w.kanji && w.kanji.trim() !== "") {
+                    if (w.kanji && kanjiRegex.test(w.kanji)) {
                         list.push({
                             unit: uObj.unit,
                             category: cat.name,
@@ -1912,6 +1914,30 @@ function setupKanjiEventListenersOnce() {
     const nextQuizBtn = document.getElementById("kanji-next-quiz-btn");
     if (nextQuizBtn) {
         nextQuizBtn.addEventListener("click", () => {
+            kanjiQuizIndex++;
+            if (kanjiQuizIndex < kanjiQuizQuestions.length) {
+                renderKanjiQuizQuestion();
+            } else {
+                startKanjiQuiz();
+            }
+        });
+    }
+
+    const quizPrevBtn = document.getElementById("kanji-quiz-prev-btn");
+    if (quizPrevBtn) {
+        quizPrevBtn.addEventListener("click", () => {
+            if (kanjiQuizIndex > 0) {
+                kanjiQuizIndex--;
+                renderKanjiQuizQuestion();
+            } else {
+                showToast("Đây là câu hỏi đầu tiên.", "info");
+            }
+        });
+    }
+
+    const quizNextBtn = document.getElementById("kanji-quiz-next-btn");
+    if (quizNextBtn) {
+        quizNextBtn.addEventListener("click", () => {
             kanjiQuizIndex++;
             if (kanjiQuizIndex < kanjiQuizQuestions.length) {
                 renderKanjiQuizQuestion();

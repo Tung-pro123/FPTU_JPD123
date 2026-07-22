@@ -2789,6 +2789,14 @@ body.light-theme .theme-toggle-btn i {
     text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
 }
 
+.kanji-quiz-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 20px;
+}
+
 /* --- Sub-mode 3: Kanji Grid --- */
 .kanji-grid-container {
     display: grid;
