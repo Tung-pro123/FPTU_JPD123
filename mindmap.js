@@ -405,11 +405,31 @@ function setupEventListeners() {
         }
     });
 
-    // Word List Filter
-    document.getElementById("list-status-filter").addEventListener("change", () => {
-        const query = document.getElementById("global-search").value.trim().toLowerCase();
-        filterWordList(query);
-    });
+    // Word List Filters
+    const listUnitSelect = document.getElementById("list-unit-filter");
+    if (listUnitSelect) {
+        listUnitSelect.addEventListener("change", () => {
+            populateListCategories();
+            const query = document.getElementById("global-search").value.trim().toLowerCase();
+            filterWordList(query);
+        });
+    }
+
+    const listCategorySelect = document.getElementById("list-category-filter");
+    if (listCategorySelect) {
+        listCategorySelect.addEventListener("change", () => {
+            const query = document.getElementById("global-search").value.trim().toLowerCase();
+            filterWordList(query);
+        });
+    }
+
+    const listStatusSelect = document.getElementById("list-status-filter");
+    if (listStatusSelect) {
+        listStatusSelect.addEventListener("change", () => {
+            const query = document.getElementById("global-search").value.trim().toLowerCase();
+            filterWordList(query);
+        });
+    }
 
     // Grammar Unit Filter
     document.getElementById("grammar-unit-filter").addEventListener("change", () => {
@@ -450,6 +470,7 @@ function renderCurrentTab() {
         document.getElementById("quiz-results").classList.add("hidden-section");
         document.getElementById("quiz-setup").classList.remove("hidden-section");
     } else if (currentTab === "list-tab") {
+        populateListCategories();
         const query = document.getElementById("global-search").value.trim().toLowerCase();
         filterWordList(query);
     } else if (currentTab === "grammar-tab") {
@@ -1687,74 +1708,108 @@ function reviewIncorrectQuizWords() {
 // ==========================================================================
 // SEARCH & WORD LIST MODULE
 // ==========================================================================
+function populateListCategories() {
+    const unitSelect = document.getElementById("list-unit-filter");
+    const catSelect = document.getElementById("list-category-filter");
+    if (!catSelect || !unitSelect) return;
+
+    const unitFilter = unitSelect.value;
+    const currentSelected = catSelect.value;
+    catSelect.innerHTML = '<option value="all">Tất cả chủ đề</option>';
+
+    let categoriesSet = new Set();
+
+    vocabData.forEach(uObj => {
+        if (unitFilter === "all" || uObj.unit === unitFilter) {
+            uObj.categories.forEach(cat => categoriesSet.add(cat.name));
+        }
+    });
+
+    categoriesSet.forEach(catName => {
+        const opt = document.createElement("option");
+        opt.value = catName;
+        opt.textContent = catName;
+        if (catName === currentSelected) opt.selected = true;
+        catSelect.appendChild(opt);
+    });
+}
+
 function filterWordList(searchQuery) {
-    const statusFilter = document.getElementById("list-status-filter").value;
+    const unitSelect = document.getElementById("list-unit-filter");
+    const catSelect = document.getElementById("list-category-filter");
+    const statusSelect = document.getElementById("list-status-filter");
+
+    const unitFilter = unitSelect ? unitSelect.value : "all";
+    const categoryFilter = catSelect ? catSelect.value : "all";
+    const statusFilter = statusSelect ? statusSelect.value : "all";
+
     const tbody = document.getElementById("word-list-tbody");
     tbody.innerHTML = "";
     
     let count = 0;
+    const isGlobalSearch = searchQuery && searchQuery.length > 0;
     
     vocabData.forEach(uObj => {
-        // Only search inside selected unit unless query is global search or user checked "all units"
-        // Let's filter by current unit by default, but if user uses search bar, we search globally!
-        const isGlobalSearch = searchQuery.length > 0;
+        const matchUnit = isGlobalSearch || unitFilter === "all" || uObj.unit === unitFilter;
         
-        if (isGlobalSearch || uObj.unit === currentUnit) {
+        if (matchUnit) {
             uObj.categories.forEach(cat => {
-                cat.words.forEach(word => {
-                    const status = getWordStatus(uObj.unit, cat.name, word);
-                    
-                    // Match query
-                    const matchQuery = !searchQuery || 
-                        word.kana.toLowerCase().includes(searchQuery) ||
-                        (word.kanji && word.kanji.toLowerCase().includes(searchQuery)) ||
-                        word.meaning.toLowerCase().includes(searchQuery) ||
-                        cat.name.toLowerCase().includes(searchQuery);
+                const matchCategory = isGlobalSearch || categoryFilter === "all" || cat.name === categoryFilter;
+                
+                if (matchCategory) {
+                    cat.words.forEach(word => {
+                        const status = getWordStatus(uObj.unit, cat.name, word);
                         
-                    // Match status
-                    const matchStatus = statusFilter === "all" || status === statusFilter;
-                    
-                    if (matchQuery && matchStatus) {
-                        count++;
+                        const matchQuery = !searchQuery || 
+                            word.kana.toLowerCase().includes(searchQuery) ||
+                            (word.kanji && word.kanji.toLowerCase().includes(searchQuery)) ||
+                            word.meaning.toLowerCase().includes(searchQuery) ||
+                            cat.name.toLowerCase().includes(searchQuery);
+                            
+                        const matchStatus = statusFilter === "all" || status === statusFilter;
                         
-                        const row = document.createElement("tr");
-                        row.innerHTML = `
-                            <td><strong style="color: var(--primary);">${uObj.unit}</strong></td>
-                            <td style="color: var(--text-muted); font-size: 13px;">${cat.name}</td>
-                            <td>
-                                <div class="table-word-cell">
-                                    <span class="table-word-kanji">${word.kanji || word.kana}</span>
-                                    <span class="table-word-kana">${word.kanji ? word.kana : ''}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div style="display:flex; align-items:center;">
-                                    <span>${word.meaning}</span>
-                                    <button class="table-row-tts-btn" data-text="${word.kana}" title="Nghe phát âm">
-                                        <i class="fa-solid fa-volume-high"></i>
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="status-badge ${status}" data-unit="${uObj.unit}" data-cat="${cat.name}" data-kana="${word.kana}">
-                                    ${status === 'done' ? 'Đã thuộc' : status === 'learning' ? 'Đang học' : 'Chưa học'}
-                                </span>
-                            </td>
-                        `;
-                        
-                        // Bind TTS
-                        row.querySelector(".table-row-tts-btn").addEventListener("click", () => {
-                            speakJapanese(word.kana);
-                        });
-                        
-                        // Bind status toggle click inline
-                        row.querySelector(".status-badge").addEventListener("click", (e) => {
-                            toggleWordStatusInline(e.target, uObj.unit, cat.name, word);
-                        });
-                        
-                        tbody.appendChild(row);
-                    }
-                });
+                        if (matchQuery && matchStatus) {
+                            count++;
+                            
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
+                                <td><strong style="color: var(--primary);">${uObj.unit}</strong></td>
+                                <td style="color: var(--text-muted); font-size: 13px;">${cat.name}</td>
+                                <td>
+                                    <div class="table-word-cell">
+                                        <span class="table-word-kanji">${word.kanji || word.kana}</span>
+                                        <span class="table-word-kana">${word.kanji ? word.kana : ''}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="display:flex; align-items:center;">
+                                        <span>${word.meaning}</span>
+                                        <button class="table-row-tts-btn" data-text="${word.kana}" title="Nghe phát âm">
+                                            <i class="fa-solid fa-volume-high"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge ${status}" data-unit="${uObj.unit}" data-cat="${cat.name}" data-kana="${word.kana}">
+                                        ${status === 'done' ? 'Đã thuộc' : status === 'learning' ? 'Đang học' : 'Chưa học'}
+                                    </span>
+                                </td>
+                            `;
+                            
+                            // Bind TTS
+                            row.querySelector(".table-row-tts-btn").addEventListener("click", () => {
+                                speakJapanese(word.kana);
+                            });
+                            
+                            // Bind status toggle click inline
+                            row.querySelector(".status-badge").addEventListener("click", (e) => {
+                                toggleWordStatusInline(e.target, uObj.unit, cat.name, word);
+                            });
+                            
+                            tbody.appendChild(row);
+                        }
+                    });
+                }
             });
         }
     });
