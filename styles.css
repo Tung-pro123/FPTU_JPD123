@@ -1199,8 +1199,10 @@ body {
     gap: 20px;
 }
 
-.quiz-panel-section.hidden-section {
-    display: none;
+.hidden-section,
+.quiz-panel-section.hidden-section,
+.kanji-mode-panel.hidden-section {
+    display: none !important;
 }
 
 .quiz-panel-section h2 {
