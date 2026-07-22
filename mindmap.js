@@ -2018,12 +2018,15 @@ function renderKanjiQuizQuestion() {
 
     q.options.forEach((opt, idx) => {
         const btn = document.createElement("button");
-        btn.className = "quiz-option-btn";
+        btn.className = "option-btn";
         btn.innerHTML = `<span class="opt-prefix">${String.fromCharCode(65 + idx)}.</span> <span class="opt-text">${opt.kana} (${opt.meaning})</span>`;
 
         btn.addEventListener("click", () => {
             if (kanjiQuizAnswered) return;
             kanjiQuizAnswered = true;
+
+            const allBtns = answersGrid.querySelectorAll(".option-btn");
+            allBtns.forEach(b => b.disabled = true);
 
             const isCorrect = opt.kanji === q.correctAnswer.kanji;
             if (isCorrect) {
@@ -2033,8 +2036,8 @@ function renderKanjiQuizQuestion() {
                 document.getElementById("kanji-feedback-text").textContent = "Chính xác! 🎉";
                 playCorrectSound();
             } else {
+                btn.classList.add("incorrect");
                 btn.classList.add("wrong");
-                const allBtns = answersGrid.querySelectorAll(".quiz-option-btn");
                 allBtns.forEach((b, bIdx) => {
                     if (q.options[bIdx].kanji === q.correctAnswer.kanji) {
                         b.classList.add("correct");

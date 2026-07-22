@@ -1354,41 +1354,50 @@ body {
     }
 }
 
-.option-btn {
-    background: rgba(255, 255, 255, 0.02);
+.option-btn,
+.quiz-option-btn {
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--panel-border);
-    border-radius: 8px;
-    padding: 14px;
+    border-radius: 10px;
+    padding: 14px 18px;
     color: var(--text-light);
     font-family: inherit;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     text-align: left;
+    backdrop-filter: var(--glass-blur);
 }
 
-.option-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
+.option-btn:hover,
+.quiz-option-btn:hover {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: var(--primary);
 }
 
-.option-btn.correct {
-    background: rgba(16, 185, 129, 0.1);
-    border-color: var(--status-done-color);
-    color: var(--status-done-color);
-    box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
+.option-btn.correct,
+.quiz-option-btn.correct {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border-color: var(--status-done-color) !important;
+    color: var(--status-done-color) !important;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
 }
 
-.option-btn.incorrect {
-    background: rgba(239, 68, 68, 0.1);
-    border-color: var(--status-error-color);
-    color: var(--status-error-color);
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.15);
+.option-btn.incorrect,
+.option-btn.wrong,
+.quiz-option-btn.incorrect,
+.quiz-option-btn.wrong {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border-color: var(--status-error-color) !important;
+    color: var(--status-error-color) !important;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
 }
 
-.option-btn:disabled {
+.option-btn:disabled,
+.quiz-option-btn:disabled {
     pointer-events: none;
+    opacity: 0.85;
 }
 
 /* Quiz Feedback Banner */
@@ -2988,14 +2997,16 @@ body.light-theme .theme-toggle-btn i {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
+    padding: 4px 14px;
+    height: auto;
+    border-radius: 20px;
     background: linear-gradient(135deg, #ec4899, #ef4444);
     color: #fff;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+    white-space: nowrap;
 }
 
 .speaking-box {
