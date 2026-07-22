@@ -454,6 +454,8 @@ function renderCurrentTab() {
         filterWordList(query);
     } else if (currentTab === "grammar-tab") {
         renderGrammar();
+    } else if (currentTab === "kanji-tab") {
+        initKanjiPractice();
     }
 }
 
@@ -1773,3 +1775,302 @@ function toggleWordStatusInline(badgeElement, unit, category, wordObj) {
     
     showToast(`Đã lưu tiến độ: ${wordObj.kana}`, "done");
 }
+
+// ==========================================================================
+// KANJI PRACTICE ENGINE
+// ==========================================================================
+let kanjiSubMode = "flashcard"; // "flashcard" | "quiz" | "grid"
+let kanjiUnitFilter = "all";
+let kanjiWords = [];
+let kanjiCardIndex = 0;
+
+// Kanji Quiz state
+let kanjiQuizQuestions = [];
+let kanjiQuizIndex = 0;
+let kanjiQuizScore = 0;
+let kanjiQuizAnswered = false;
+
+function getFilteredKanjiWords() {
+    let list = [];
+    vocabData.forEach(uObj => {
+        if (kanjiUnitFilter === "all" || uObj.unit === kanjiUnitFilter) {
+            uObj.categories.forEach(cat => {
+                cat.words.forEach(w => {
+                    if (w.kanji && w.kanji.trim() !== "") {
+                        list.push({
+                            unit: uObj.unit,
+                            category: cat.name,
+                            word: w.word,
+                            kana: w.kana,
+                            kanji: w.kanji,
+                            meaning: w.meaning
+                        });
+                    }
+                });
+            });
+        }
+    });
+    return list;
+}
+
+function initKanjiPractice() {
+    setupKanjiEventListenersOnce();
+    renderKanjiTab();
+}
+
+let kanjiEventsInitialized = false;
+function setupKanjiEventListenersOnce() {
+    if (kanjiEventsInitialized) return;
+    kanjiEventsInitialized = true;
+
+    // Sub-mode tabs
+    const subnavBtns = document.querySelectorAll(".kanji-subnav-btn");
+    subnavBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            subnavBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            kanjiSubMode = btn.getAttribute("data-mode");
+
+            // Toggle sub panels
+            document.getElementById("kanji-flashcard-mode").classList.toggle("hidden-section", kanjiSubMode !== "flashcard");
+            document.getElementById("kanji-quiz-mode").classList.toggle("hidden-section", kanjiSubMode !== "quiz");
+            document.getElementById("kanji-grid-mode").classList.toggle("hidden-section", kanjiSubMode !== "grid");
+
+            if (kanjiSubMode === "quiz") {
+                startKanjiQuiz();
+            } else {
+                renderKanjiTab();
+            }
+        });
+    });
+
+    // Unit filter
+    const unitFilter = document.getElementById("kanji-unit-filter");
+    if (unitFilter) {
+        unitFilter.addEventListener("change", (e) => {
+            kanjiUnitFilter = e.target.value;
+            kanjiCardIndex = 0;
+            if (kanjiSubMode === "quiz") {
+                startKanjiQuiz();
+            } else {
+                renderKanjiTab();
+            }
+        });
+    }
+
+    // Flashcard Flip & Navigation
+    const card = document.getElementById("kanji-card");
+    if (card) {
+        card.addEventListener("click", () => {
+            card.classList.toggle("flipped");
+        });
+    }
+
+    const prevBtn = document.getElementById("kanji-prev-btn");
+    if (prevBtn) {
+        prevBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (kanjiWords.length === 0) return;
+            kanjiCardIndex = (kanjiCardIndex - 1 + kanjiWords.length) % kanjiWords.length;
+            renderKanjiCard();
+        });
+    }
+
+    const nextBtn = document.getElementById("kanji-next-btn");
+    if (nextBtn) {
+        nextBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (kanjiWords.length === 0) return;
+            kanjiCardIndex = (kanjiCardIndex + 1) % kanjiWords.length;
+            renderKanjiCard();
+        });
+    }
+
+    // Flashcard TTS
+    const ttsBtn = document.getElementById("kanji-card-tts");
+    if (ttsBtn) {
+        ttsBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (kanjiWords[kanjiCardIndex]) {
+                speakJapanese(kanjiWords[kanjiCardIndex].kana);
+            }
+        });
+    }
+
+    // Quiz next button
+    const nextQuizBtn = document.getElementById("kanji-next-quiz-btn");
+    if (nextQuizBtn) {
+        nextQuizBtn.addEventListener("click", () => {
+            kanjiQuizIndex++;
+            if (kanjiQuizIndex < kanjiQuizQuestions.length) {
+                renderKanjiQuizQuestion();
+            } else {
+                startKanjiQuiz();
+            }
+        });
+    }
+}
+
+function renderKanjiTab() {
+    kanjiWords = getFilteredKanjiWords();
+
+    if (kanjiSubMode === "flashcard") {
+        renderKanjiCard();
+    } else if (kanjiSubMode === "quiz") {
+        if (kanjiQuizQuestions.length === 0) {
+            startKanjiQuiz();
+        } else {
+            renderKanjiQuizQuestion();
+        }
+    } else if (kanjiSubMode === "grid") {
+        renderKanjiGrid();
+    }
+}
+
+function renderKanjiCard() {
+    const card = document.getElementById("kanji-card");
+    if (card) card.classList.remove("flipped");
+
+    if (kanjiWords.length === 0) {
+        document.getElementById("kanji-card-unit").textContent = "-";
+        document.getElementById("kanji-card-char").textContent = "無";
+        document.getElementById("kanji-back-char").textContent = "無";
+        document.getElementById("kanji-card-kana").textContent = "Chưa có dữ liệu";
+        document.getElementById("kanji-card-meaning").textContent = "Không tìm thấy Kanji";
+        document.getElementById("kanji-counter").textContent = "0 / 0";
+        return;
+    }
+
+    if (kanjiCardIndex >= kanjiWords.length) kanjiCardIndex = 0;
+    const item = kanjiWords[kanjiCardIndex];
+
+    document.getElementById("kanji-card-unit").textContent = item.unit;
+    document.getElementById("kanji-card-char").textContent = item.kanji;
+    document.getElementById("kanji-back-char").textContent = item.kanji;
+    document.getElementById("kanji-card-kana").textContent = item.kana;
+    document.getElementById("kanji-card-meaning").textContent = item.meaning;
+    document.getElementById("kanji-counter").textContent = `${kanjiCardIndex + 1} / ${kanjiWords.length}`;
+}
+
+function startKanjiQuiz() {
+    kanjiWords = getFilteredKanjiWords();
+    if (kanjiWords.length < 2) {
+        showToast("Không đủ từ vựng Kanji để tạo bài trắc nghiệm (cần ít nhất 2 từ).", "warning");
+        return;
+    }
+
+    // Shuffle words for quiz
+    const pool = shuffleArray([...kanjiWords]);
+    const numQ = Math.min(10, pool.length);
+    kanjiQuizQuestions = pool.slice(0, numQ).map(qItem => {
+        // Generate options (1 correct, 3 wrong)
+        const wrongPool = kanjiWords.filter(w => w.kanji !== qItem.kanji);
+        const shuffledWrongs = shuffleArray([...wrongPool]).slice(0, 3);
+        const options = shuffleArray([qItem, ...shuffledWrongs]);
+
+        return {
+            questionKanji: qItem.kanji,
+            correctAnswer: qItem,
+            options: options
+        };
+    });
+
+    kanjiQuizIndex = 0;
+    kanjiQuizScore = 0;
+    renderKanjiQuizQuestion();
+}
+
+function renderKanjiQuizQuestion() {
+    if (kanjiQuizIndex >= kanjiQuizQuestions.length) {
+        showToast(`Hoàn thành trắc nghiệm Kanji! Đúng: ${kanjiQuizScore}/${kanjiQuizQuestions.length}`, "done");
+        startKanjiQuiz();
+        return;
+    }
+
+    const q = kanjiQuizQuestions[kanjiQuizIndex];
+    kanjiQuizAnswered = false;
+
+    document.getElementById("kanji-quiz-curr").textContent = kanjiQuizIndex + 1;
+    document.getElementById("kanji-quiz-total").textContent = kanjiQuizQuestions.length;
+    document.getElementById("kanji-quiz-score").textContent = kanjiQuizScore;
+
+    const pct = ((kanjiQuizIndex + 1) / kanjiQuizQuestions.length) * 100;
+    document.getElementById("kanji-quiz-bar").style.width = `${pct}%`;
+
+    document.getElementById("kanji-quiz-char").textContent = q.questionKanji;
+
+    const feedbackBanner = document.getElementById("kanji-quiz-feedback");
+    if (feedbackBanner) feedbackBanner.classList.add("hidden-banner");
+
+    const answersGrid = document.getElementById("kanji-quiz-answers");
+    answersGrid.innerHTML = "";
+
+    q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-option-btn";
+        btn.innerHTML = `<span class="opt-prefix">${String.fromCharCode(65 + idx)}.</span> <span class="opt-text">${opt.kana} (${opt.meaning})</span>`;
+
+        btn.addEventListener("click", () => {
+            if (kanjiQuizAnswered) return;
+            kanjiQuizAnswered = true;
+
+            const isCorrect = opt.kanji === q.correctAnswer.kanji;
+            if (isCorrect) {
+                btn.classList.add("correct");
+                kanjiQuizScore++;
+                document.getElementById("kanji-quiz-score").textContent = kanjiQuizScore;
+                document.getElementById("kanji-feedback-text").textContent = "Chính xác! 🎉";
+                playCorrectSound();
+            } else {
+                btn.classList.add("wrong");
+                const allBtns = answersGrid.querySelectorAll(".quiz-option-btn");
+                allBtns.forEach((b, bIdx) => {
+                    if (q.options[bIdx].kanji === q.correctAnswer.kanji) {
+                        b.classList.add("correct");
+                    }
+                });
+                document.getElementById("kanji-feedback-text").textContent = `Chưa đúng! Đáp án đúng: ${q.correctAnswer.kana} (${q.correctAnswer.meaning})`;
+                playWrongSound();
+            }
+
+            feedbackBanner.classList.remove("hidden-banner");
+        });
+
+        answersGrid.appendChild(btn);
+    });
+}
+
+function renderKanjiGrid() {
+    kanjiWords = getFilteredKanjiWords();
+    const container = document.getElementById("kanji-grid-list");
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    if (kanjiWords.length === 0) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">Không tìm thấy từ vựng Kanji nào.</p>`;
+        return;
+    }
+
+    kanjiWords.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "kanji-grid-card";
+        card.innerHTML = `
+            <span class="kanji-grid-unit">${item.unit}</span>
+            <button class="table-row-tts-btn kanji-grid-tts" data-kana="${item.kana}" title="Nghe đọc">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <div class="kanji-grid-char">${item.kanji}</div>
+            <div class="kanji-grid-kana">${item.kana}</div>
+            <div class="kanji-grid-meaning">${item.meaning}</div>
+        `;
+
+        card.querySelector(".kanji-grid-tts").addEventListener("click", (e) => {
+            e.stopPropagation();
+            speakJapanese(item.kana);
+        });
+
+        container.appendChild(card);
+    });
+}
+

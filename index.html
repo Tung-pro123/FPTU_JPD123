@@ -92,6 +92,10 @@
                         <i class="fa-solid fa-book-open"></i>
                         <span>Ngữ pháp</span>
                     </button>
+                    <button class="nav-item" data-tab="kanji-tab">
+                        <i class="fa-solid fa-font"></i>
+                        <span>Luyện Kanji</span>
+                    </button>
                 </nav>
 
                 <!-- Detailed Stats Dashboard Panel -->
@@ -414,6 +418,112 @@
                         </div>
                         <div id="grammar-content" class="grammar-content">
                             <!-- Dynamically populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. KANJI PRACTICE VIEW -->
+                <div id="kanji-tab" class="tab-panel">
+                    <div class="kanji-wrapper">
+                        <!-- Kanji Header & Controls -->
+                        <div class="kanji-header">
+                            <div class="kanji-title-area">
+                                <i class="fa-solid fa-font"></i>
+                                <h2>Luyện tập Kanji</h2>
+                            </div>
+                            <div class="kanji-controls">
+                                <div class="kanji-subnav">
+                                    <button class="kanji-subnav-btn active" data-mode="flashcard">
+                                        <i class="fa-solid fa-clone"></i> Thẻ Flashcard
+                                    </button>
+                                    <button class="kanji-subnav-btn" data-mode="quiz">
+                                        <i class="fa-solid fa-circle-question"></i> Trắc nghiệm
+                                    </button>
+                                    <button class="kanji-subnav-btn" data-mode="grid">
+                                        <i class="fa-solid fa-table-cells"></i> Bảng Kanji
+                                    </button>
+                                </div>
+                                <div class="kanji-unit-filter-group">
+                                    <select id="kanji-unit-filter">
+                                        <option value="all">Tất cả Unit</option>
+                                        <option value="Unit 4">Unit 4</option>
+                                        <option value="Unit 5">Unit 5</option>
+                                        <option value="Unit 6">Unit 6</option>
+                                        <option value="Unit 7">Unit 7</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub-mode 1: Kanji Flashcard -->
+                        <div id="kanji-flashcard-mode" class="kanji-mode-panel">
+                            <div class="kanji-card-container">
+                                <div class="kanji-card" id="kanji-card">
+                                    <div class="kanji-card-inner">
+                                        <div class="kanji-card-front">
+                                            <span class="kanji-badge" id="kanji-card-unit">Unit 4</span>
+                                            <div class="kanji-main-char" id="kanji-card-char">漢</div>
+                                            <p class="kanji-hint-text">Bấm vào thẻ để xem đáp án</p>
+                                        </div>
+                                        <div class="kanji-card-back">
+                                            <div class="kanji-card-back-header">
+                                                <div class="kanji-back-char" id="kanji-back-char">漢</div>
+                                                <button class="tts-btn" id="kanji-card-tts" title="Nghe đọc">
+                                                    <i class="fa-solid fa-volume-high"></i>
+                                                </button>
+                                            </div>
+                                            <div class="kanji-reading-box">
+                                                <div class="kanji-label">Cách đọc (Hiragana):</div>
+                                                <div class="kanji-val-kana" id="kanji-card-kana">かんじ</div>
+                                            </div>
+                                            <div class="kanji-meaning-box">
+                                                <div class="kanji-label">Ý nghĩa:</div>
+                                                <div class="kanji-val-meaning" id="kanji-card-meaning">Chữ Hán</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kanji-card-controls">
+                                    <button id="kanji-prev-btn" class="glass-btn"><i class="fa-solid fa-chevron-left"></i> Trước</button>
+                                    <span id="kanji-counter" class="kanji-counter">1 / 10</span>
+                                    <button id="kanji-next-btn" class="glass-btn">Sau <i class="fa-solid fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub-mode 2: Kanji Quiz -->
+                        <div id="kanji-quiz-mode" class="kanji-mode-panel hidden-section">
+                            <div class="kanji-quiz-container">
+                                <div class="quiz-header">
+                                    <div class="quiz-progress-info">
+                                        Câu hỏi: <span id="kanji-quiz-curr">1</span>/<span id="kanji-quiz-total">10</span>
+                                    </div>
+                                    <div class="quiz-score-info">
+                                        Đúng: <span id="kanji-quiz-score" class="correct-text">0</span>
+                                    </div>
+                                </div>
+                                <div class="quiz-progress-bar-container">
+                                    <div class="quiz-progress-bar" id="kanji-quiz-bar" style="width: 10%;"></div>
+                                </div>
+                                <div class="quiz-question-card">
+                                    <div class="quiz-question-hint">Hán tự này đọc là gì / có nghĩa là gì?</div>
+                                    <div class="quiz-question-text kanji-quiz-question-char" id="kanji-quiz-char">漢字</div>
+                                </div>
+                                <div class="quiz-answers-grid" id="kanji-quiz-answers">
+                                    <!-- Options generated dynamically -->
+                                </div>
+                                <div class="quiz-feedback-banner hidden-banner" id="kanji-quiz-feedback">
+                                    <span id="kanji-feedback-text">Chính xác!</span>
+                                    <button id="kanji-next-quiz-btn" class="glass-btn">Tiếp tục <i class="fa-solid fa-circle-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub-mode 3: Kanji Grid/Table -->
+                        <div id="kanji-grid-mode" class="kanji-mode-panel hidden-section">
+                            <div class="kanji-grid-container" id="kanji-grid-list">
+                                <!-- Grid items populated dynamically -->
+                            </div>
                         </div>
                     </div>
                 </div>
