@@ -425,7 +425,7 @@ const SPEAKING_DATA = [
                 qVi: "Hôm qua bạn Yuka đã đi đâu làm gì?",
                 aJp: "スーパーへ かいものに 行きました。",
                 aVi: "Bạn ấy đã đi siêu thị để mua sắm.",
-                tip: "💡 かいもの (買い物 - mua sắm)"
+                tip: "💡 Có thể trả lời ngắn gọn: かいものに 行きました。(Đã đi mua sắm - Vẫn đúng 100% và ăn trọn điểm!)"
             },
             {
                 qJp: "Đà Nẵngで どのレストランが いちばん おいしいですか。",
