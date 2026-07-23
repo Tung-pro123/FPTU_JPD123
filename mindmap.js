@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function initApp() {
     try {
-        // Load data
-        const response = await fetch("vocab_data.json");
+        // Load data with cache busting
+        const response = await fetch("vocab_data.json?v=" + Date.now());
         vocabData = await response.json();
         
         // Load progress from localStorage
