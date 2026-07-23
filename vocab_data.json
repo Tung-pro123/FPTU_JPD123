@@ -12,21 +12,21 @@
             "meaning": "phía đông"
           },
           {
-            "word": "にし (西)",
+            "word": "にし",
             "kana": "にし",
-            "kanji": "西",
+            "kanji": "",
             "meaning": "phía tây"
           },
           {
-            "word": "みなみ (南)",
+            "word": "みなみ",
             "kana": "みなみ",
-            "kanji": "南",
+            "kanji": "",
             "meaning": "phía nam"
           },
           {
-            "word": "きた (北)",
+            "word": "きた",
             "kana": "きた",
-            "kanji": "北",
+            "kanji": "",
             "meaning": "phía bắc"
           },
           {
@@ -47,33 +47,33 @@
         "name": "2. Phương tiện giao thông (Transportation)",
         "words": [
           {
-            "word": "くるま (車)",
+            "word": "くるま",
             "kana": "くるま",
-            "kanji": "車",
+            "kanji": "",
             "meaning": "ô tô"
           },
           {
-            "word": "ひこうき (飛行機)",
+            "word": "ひこうき",
             "kana": "ひこうき",
-            "kanji": "飛行機",
+            "kanji": "",
             "meaning": "máy bay"
           },
           {
-            "word": "しんかんせん (新幹線)",
+            "word": "しんかんせん",
             "kana": "しんかんせん",
-            "kanji": "新幹線",
+            "kanji": "",
             "meaning": "tàu cao tốc Shinkansen"
           },
           {
-            "word": "でんしゃ (電車)",
+            "word": "でんしゃ",
             "kana": "でんしゃ",
-            "kanji": "電車",
+            "kanji": "",
             "meaning": "tàu điện"
           },
           {
-            "word": "あるいて (歩いて)",
+            "word": "あるいて",
             "kana": "あるいて",
-            "kanji": "歩いて",
+            "kanji": "",
             "meaning": "đi bộ (phương thức)"
           }
         ]
@@ -82,21 +82,21 @@
         "name": "3. Địa điểm & Hành chính (Places & Admin)",
         "words": [
           {
-            "word": "まち (町)",
+            "word": "まち",
             "kana": "まち",
-            "kanji": "町",
+            "kanji": "",
             "meaning": "thành phố, thị trấn"
           },
           {
-            "word": "えき (駅)",
+            "word": "えき",
             "kana": "えき",
-            "kanji": "駅",
+            "kanji": "",
             "meaning": "nhà ga"
           },
           {
-            "word": "京 (きょう)",
+            "word": "きょう",
             "kana": "きょう",
-            "kanji": "京",
+            "kanji": "",
             "meaning": "kinh đô, thủ đô"
           },
           {
@@ -106,15 +106,15 @@
             "meaning": "Tokyo"
           },
           {
-            "word": "市 (し)",
+            "word": "し",
             "kana": "し",
-            "kanji": "市",
+            "kanji": "",
             "meaning": "thành phố (hậu tố)"
           },
           {
-            "word": "区 (く)",
+            "word": "く",
             "kana": "く",
-            "kanji": "区",
+            "kanji": "",
             "meaning": "quận, khu vực"
           },
           {
@@ -130,27 +130,27 @@
             "meaning": "nước ngoài"
           },
           {
-            "word": "おんせん (温泉)",
+            "word": "おんせん",
             "kana": "おんせん",
-            "kanji": "温泉",
+            "kanji": "",
             "meaning": "suối nước nóng"
           },
           {
-            "word": "きょうかい (教会)",
+            "word": "きょうかい",
             "kana": "きょうかい",
-            "kanji": "教会",
+            "kanji": "",
             "meaning": "nhà thờ"
           },
           {
-            "word": "おしろ (お城)",
+            "word": "おしろ",
             "kana": "おしろ",
-            "kanji": "お城",
+            "kanji": "",
             "meaning": "lâu đài"
           },
           {
-            "word": "じんじゃ (神社)",
+            "word": "じんじゃ",
             "kana": "じんじゃ",
-            "kanji": "神社",
+            "kanji": "",
             "meaning": "đền thờ (Thần đạo)"
           },
           {
@@ -166,10 +166,34 @@
             "meaning": "tòa nhà"
           },
           {
-            "word": "ところ (所)",
+            "word": "ところ",
             "kana": "ところ",
-            "kanji": "所",
+            "kanji": "",
             "meaning": "nơi chốn, địa điểm"
+          },
+          {
+            "word": "中国 (ちゅうごく)",
+            "kana": "ちゅうごく",
+            "kanji": "中国",
+            "meaning": "Trung Quốc"
+          },
+          {
+            "word": "９区 (きゅうく)",
+            "kana": "きゅうく",
+            "kanji": "９区",
+            "meaning": "Quận 9"
+          },
+          {
+            "word": "9区 (きゅうく)",
+            "kana": "きゅうく",
+            "kanji": "9区",
+            "meaning": "Quận 9"
+          },
+          {
+            "word": "ホーチミン市 (ホーチミンし)",
+            "kana": "ホーチミンし",
+            "kanji": "ホーチミン市",
+            "meaning": "Tp. HCM"
           }
         ]
       },
@@ -177,33 +201,33 @@
         "name": "4. Thiên nhiên & Thời tiết (Nature & Weather)",
         "words": [
           {
-            "word": "かわ (川)",
+            "word": "かわ",
             "kana": "かわ",
-            "kanji": "川",
+            "kanji": "",
             "meaning": "con sông"
           },
           {
-            "word": "やま (山)",
+            "word": "やま",
             "kana": "やま",
-            "kanji": "山",
+            "kanji": "",
             "meaning": "ngọn núi"
           },
           {
-            "word": "みどり (緑)",
+            "word": "みどり",
             "kana": "みどり",
-            "kanji": "緑",
+            "kanji": "",
             "meaning": "màu xanh lá, cây xanh"
           },
           {
-            "word": "あめ (雨)",
+            "word": "あめ",
             "kana": "あめ",
-            "kanji": "雨",
+            "kanji": "",
             "meaning": "mưa"
           },
           {
-            "word": "ゆき (雪)",
+            "word": "ゆき",
             "kana": "ゆき",
-            "kanji": "雪",
+            "kanji": "",
             "meaning": "tuyết"
           }
         ]
@@ -212,15 +236,15 @@
         "name": "5. Con người & Xưng hô (People)",
         "words": [
           {
-            "word": "ひと (人)",
+            "word": "ひと",
             "kana": "ひと",
-            "kanji": "人",
+            "kanji": "",
             "meaning": "người"
           },
           {
-            "word": "男 (おとこ)",
+            "word": "おとこ",
             "kana": "おとこ",
-            "kanji": "男",
+            "kanji": "",
             "meaning": "nam giới"
           },
           {
@@ -230,9 +254,9 @@
             "meaning": "người đàn ông"
           },
           {
-            "word": "女 (おんな)",
+            "word": "おんな",
             "kana": "おんな",
-            "kanji": "女",
+            "kanji": "",
             "meaning": "nữ giới"
           },
           {
@@ -275,15 +299,15 @@
             "meaning": "nhỏ, bé"
           },
           {
-            "word": "おおい (多い)",
+            "word": "おおい",
             "kana": "おおい",
-            "kanji": "多い",
+            "kanji": "",
             "meaning": "nhiều"
           },
           {
-            "word": "すくない (少ない)",
+            "word": "すくない",
             "kana": "すくない",
-            "kanji": "少ない",
+            "kanji": "",
             "meaning": "ít"
           }
         ]
@@ -292,15 +316,15 @@
         "name": "Đánh giá & Trạng thái",
         "words": [
           {
-            "word": "あたらしい (新しい)",
+            "word": "あたらしい",
             "kana": "あたらしい",
-            "kanji": "新しい",
+            "kanji": "",
             "meaning": "mới"
           },
           {
-            "word": "ふるい (古い)",
+            "word": "ふるい",
             "kana": "ふるい",
-            "kanji": "古い",
+            "kanji": "",
             "meaning": "cũ"
           },
           {
@@ -310,27 +334,27 @@
             "meaning": "tốt"
           },
           {
-            "word": "わるい (悪い)",
+            "word": "わるい",
             "kana": "わるい",
-            "kanji": "悪い",
+            "kanji": "",
             "meaning": "xấu, tồi"
           },
           {
-            "word": "たかい (高い)",
+            "word": "たかい",
             "kana": "たかい",
-            "kanji": "高い",
+            "kanji": "",
             "meaning": "cao, đắt"
           },
           {
-            "word": "ひくい (低い)",
+            "word": "ひくい",
             "kana": "ひくい",
-            "kanji": "低い",
+            "kanji": "",
             "meaning": "thấp"
           },
           {
-            "word": "やすい (安い)",
+            "word": "やすい",
             "kana": "やすい",
-            "kanji": "安い",
+            "kanji": "",
             "meaning": "rẻ"
           },
           {
@@ -340,9 +364,9 @@
             "meaning": "đẹp, sạch sẽ"
           },
           {
-            "word": "しずか (静か)",
+            "word": "しずか",
             "kana": "しずか",
-            "kanji": "静か",
+            "kanji": "",
             "meaning": "yên tĩnh"
           },
           {
@@ -352,9 +376,9 @@
             "meaning": "nhộn nhịp, náo nhiệt"
           },
           {
-            "word": "ゆうめい (有名)",
+            "word": "ゆうめい",
             "kana": "ゆうめい",
-            "kanji": "有名",
+            "kanji": "",
             "meaning": "nổi tiếng"
           }
         ]
@@ -404,21 +428,21 @@
             "meaning": "ngon"
           },
           {
-            "word": "あまい (甘い)",
+            "word": "あまい",
             "kana": "あまい",
-            "kanji": "甘い",
+            "kanji": "",
             "meaning": "ngọt"
           },
           {
-            "word": "からい (辛い)",
+            "word": "からい",
             "kana": "からい",
-            "kanji": "辛い",
+            "kanji": "",
             "meaning": "cay"
           },
           {
-            "word": "にがい (苦い)",
+            "word": "にがい",
             "kana": "にがい",
-            "kanji": "苦い",
+            "kanji": "",
             "meaning": "đắng"
           },
           {
@@ -445,9 +469,9 @@
             "meaning": "ngày hôm trước"
           },
           {
-            "word": "いちねんじゅう (一年中)",
+            "word": "いちねんじゅう",
             "kana": "いちねんじゅう",
-            "kanji": "一年中",
+            "kanji": "",
             "meaning": "suốt 1 năm"
           }
         ]
@@ -474,6 +498,14 @@
             "meaning": "không... lắm (phó từ)"
           }
         ]
+      },
+      {
+        "name": "4. Từ vựng giao tiếp & Chung (General)",
+        "words": []
+      },
+      {
+        "name": "5. Thời gian (Time)",
+        "words": []
       }
     ]
   },
@@ -514,9 +546,9 @@
             "meaning": "sáng nay"
           },
           {
-            "word": "こんばん (今晩)",
+            "word": "こんばん",
             "kana": "こんばん",
-            "kanji": "今晩",
+            "kanji": "",
             "meaning": "tối nay"
           },
           {
@@ -568,9 +600,9 @@
             "meaning": "mỗi tháng"
           },
           {
-            "word": "きょねん (去年)",
+            "word": "きょねん",
             "kana": "きょねん",
-            "kanji": "去年",
+            "kanji": "",
             "meaning": "năm ngoái"
           },
           {
@@ -587,7 +619,7 @@
           },
           {
             "word": "毎年 (まいねん / まいとし)",
-            "kana": "まいねん / まいとし",
+            "kana": "まいとし",
             "kanji": "毎年",
             "meaning": "hàng năm"
           },
@@ -680,9 +712,9 @@
             "meaning": "mua sắm"
           },
           {
-            "word": "食事します (しょくじします)",
+            "word": "しょくじします",
             "kana": "しょくじします",
-            "kanji": "食事します",
+            "kanji": "",
             "meaning": "dùng bữa, ăn uống"
           },
           {
@@ -980,6 +1012,85 @@
             "kana": "ひとりで",
             "kanji": "",
             "meaning": "một mình (trạng từ chỉ cách thức)"
+          }
+        ]
+      },
+      {
+        "name": "1. Con người & Nghề nghiệp (People & Occupations)",
+        "words": []
+      },
+      {
+        "name": "2. Thời gian & Tần suất (Time & Frequency)",
+        "words": [
+          {
+            "word": "午前 (ごぜん)",
+            "kana": "ごぜん",
+            "kanji": "午前",
+            "meaning": "AM (Buổi sáng)"
+          },
+          {
+            "word": "後ろ (うしろ)",
+            "kana": "うしろ",
+            "kanji": "後ろ",
+            "meaning": "Phía sau"
+          },
+          {
+            "word": "休み (やすみ)",
+            "kana": "やすみ",
+            "kanji": "休み",
+            "meaning": "Nghỉ (N)"
+          },
+          {
+            "word": "休みの日 (やすみのひ)",
+            "kana": "やすみのひ",
+            "kanji": "休みの日",
+            "meaning": "Ngày nghỉ"
+          },
+          {
+            "word": "休日 (きゅうじつ)",
+            "kana": "きゅうじつ",
+            "kanji": "休日",
+            "meaning": "Ngày nghỉ"
+          }
+        ]
+      },
+      {
+        "name": "3. Động từ thường nhật (Daily Verbs)",
+        "words": [
+          {
+            "word": "見学 (けんがく)",
+            "kana": "けんがく",
+            "kanji": "見学",
+            "meaning": "Tham quan và học tập"
+          },
+          {
+            "word": "見物 (けんぶつ)",
+            "kana": "けんぶつ",
+            "kanji": "見物",
+            "meaning": "Thăm quan"
+          }
+        ]
+      },
+      {
+        "name": "4. Ăn uống & Món ăn (Food & Drink)",
+        "words": [
+          {
+            "word": "食事 (しょくじ)",
+            "kana": "しょくじ",
+            "kanji": "食事",
+            "meaning": "Việc dùng bữa"
+          },
+          {
+            "word": "飲食 (いんしょく)",
+            "kana": "いんしょく",
+            "kanji": "飲食",
+            "meaning": "Ẩm thực"
+          },
+          {
+            "word": "食べ物 (たべもの)",
+            "kana": "たべもの",
+            "kanji": "食べ物",
+            "meaning": "Đồ ăn"
           }
         ]
       }
@@ -1300,9 +1411,9 @@
             "meaning": "ruộng lúa nước"
           },
           {
-            "word": "門 (もん)",
+            "word": "もん",
             "kana": "もん",
-            "kanji": "門",
+            "kanji": "",
             "meaning": "cổng"
           }
         ]
@@ -1510,6 +1621,78 @@
             "kana": "わかりました",
             "kanji": "",
             "meaning": "Tôi hiểu rồi / Vâng ạ"
+          }
+        ]
+      },
+      {
+        "name": "1. Thời gian (Time)",
+        "words": []
+      },
+      {
+        "name": "2. Động từ di chuyển (Movement Verbs)",
+        "words": []
+      },
+      {
+        "name": "3. Động từ giao tiếp & Hành động (Action Verbs)",
+        "words": [
+          {
+            "word": "会います (あいます)",
+            "kana": "あいます",
+            "kanji": "会います",
+            "meaning": "Gặp"
+          },
+          {
+            "word": "会見 (かいけん)",
+            "kana": "かいけん",
+            "kanji": "会見",
+            "meaning": "Phỏng vấn"
+          },
+          {
+            "word": "読みます (よみます)",
+            "kana": "よみます",
+            "kanji": "読みます",
+            "meaning": "Đọc"
+          },
+          {
+            "word": "話 (はなし)",
+            "kana": "はなし",
+            "kanji": "話",
+            "meaning": "Câu chuyện"
+          }
+        ]
+      },
+      {
+        "name": "4. Xã hội & Tổ chức (Society & Admin)",
+        "words": [
+          {
+            "word": "辞書 (じしょ)",
+            "kana": "じしょ",
+            "kanji": "辞書",
+            "meaning": "Từ điển"
+          },
+          {
+            "word": "お寺 (おてら)",
+            "kana": "おてら",
+            "kanji": "お寺",
+            "meaning": "Chùa"
+          },
+          {
+            "word": "田中さん (たなかさん)",
+            "kana": "たなかさん",
+            "kanji": "田中さん",
+            "meaning": "Họ của người Nhật"
+          },
+          {
+            "word": "大学の門 (だいがくのもん)",
+            "kana": "だいがくのもん",
+            "kanji": "大学の門",
+            "meaning": "Cổng trường đại học"
+          },
+          {
+            "word": "学校の門 (がっこうのもん)",
+            "kana": "がっこうのもん",
+            "kanji": "学校の門",
+            "meaning": "Cổng trường"
           }
         ]
       }
@@ -1789,9 +1972,9 @@
             "meaning": "dạy, chỉ bảo"
           },
           {
-            "word": "むかえます (むかえにいきます)",
+            "word": "むかえにいきます",
             "kana": "むかえにいきます",
-            "kanji": "むかえます",
+            "kanji": "",
             "meaning": "đón, đi đón"
           },
           {
@@ -1807,9 +1990,9 @@
             "meaning": "chơi (nhạc cụ)"
           },
           {
-            "word": "かけます (電話をかけます)",
+            "word": "かけます",
             "kana": "かけます",
-            "kanji": "電話をかけます",
+            "kanji": "",
             "meaning": "gọi (điện thoại)"
           },
           {
@@ -1825,15 +2008,15 @@
             "meaning": "đóng (cửa)"
           },
           {
-            "word": "すいます (タバコをすいます)",
+            "word": "タバコをすいます",
             "kana": "タバコをすいます",
-            "kanji": "すいます",
+            "kanji": "",
             "meaning": "hút (thuốc lá)"
           },
           {
-            "word": "およぎます (泳ぎます)",
+            "word": "およぎます",
             "kana": "およぎます",
-            "kanji": "泳ぎます",
+            "kanji": "",
             "meaning": "bơi, bơi lội"
           }
         ]
@@ -1871,9 +2054,9 @@
         "name": "6. Thiên nhiên & Động vật (Nature & Animals)",
         "words": [
           {
-            "word": "き (木)",
+            "word": "き",
             "kana": "き",
-            "kanji": "木",
+            "kanji": "",
             "meaning": "cây, gỗ"
           },
           {
@@ -1954,7 +2137,7 @@
           },
           {
             "word": "半日 (はんにち / はんじつ)",
-            "kana": "はんにち",
+            "kana": "はんじつ",
             "kanji": "半日",
             "meaning": "nửa ngày"
           },
@@ -1975,6 +2158,18 @@
             "kana": "はんぶん",
             "kanji": "半分",
             "meaning": "một nửa"
+          },
+          {
+            "word": "半ば (なかば)",
+            "kana": "なかば",
+            "kanji": "半ば",
+            "meaning": "Giữa"
+          },
+          {
+            "word": "大半 (たいはん)",
+            "kana": "たいはん",
+            "kanji": "大半",
+            "meaning": "Quá một nửa"
           }
         ]
       },
@@ -2004,6 +2199,36 @@
             "kana": "こびと",
             "kanji": "小人",
             "meaning": "người lùn / trẻ em"
+          },
+          {
+            "word": "大きい (おおきい)",
+            "kana": "おおきい",
+            "kanji": "大きい",
+            "meaning": "To, lớn"
+          },
+          {
+            "word": "大学生 (だいがくせい)",
+            "kana": "だいがくせい",
+            "kanji": "大学生",
+            "meaning": "Sinh viên đại học"
+          },
+          {
+            "word": "大会 (たいかい)",
+            "kana": "たいかい",
+            "kanji": "大会",
+            "meaning": "Đại hội"
+          },
+          {
+            "word": "小さい (ちいさい)",
+            "kana": "ちいさい",
+            "kanji": "小さい",
+            "meaning": "Nhỏ"
+          },
+          {
+            "word": "小学生 (しょうがくせい)",
+            "kana": "しょうがくせい",
+            "kanji": "小学生",
+            "meaning": "Học sinh tiểu học"
           }
         ]
       },
@@ -2017,6 +2242,14 @@
             "meaning": "rau, rau củ"
           }
         ]
+      },
+      {
+        "name": "3. Đồ ăn & Thực phẩm (Food)",
+        "words": []
+      },
+      {
+        "name": "1. Đồ dùng & Chi phí",
+        "words": []
       }
     ]
   }
