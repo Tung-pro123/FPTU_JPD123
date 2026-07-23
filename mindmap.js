@@ -12,6 +12,7 @@ let currentTab = "mindmap-tab";
 
 // Progress tracking: key is "unit::category::kana", value is "new" | "learning" | "done"
 let userProgress = {};
+let grammarProgress = {};
 
 // Mind Map Viewport State
 let zoom = 1.0;
@@ -91,6 +92,15 @@ function loadProgress() {
             userProgress = JSON.parse(saved);
         } catch (e) {
             userProgress = {};
+        }
+    }
+
+    const savedGrammar = localStorage.getItem("jpd123_grammar_progress");
+    if (savedGrammar) {
+        try {
+            grammarProgress = JSON.parse(savedGrammar);
+        } catch (e) {
+            grammarProgress = {};
         }
     }
 }
@@ -431,10 +441,17 @@ function setupEventListeners() {
         });
     }
 
-    // Grammar Unit Filter
+    // Grammar Filters
     document.getElementById("grammar-unit-filter").addEventListener("change", () => {
         renderGrammar();
     });
+
+    const grammarStatusSelect = document.getElementById("grammar-status-filter");
+    if (grammarStatusSelect) {
+        grammarStatusSelect.addEventListener("change", () => {
+            renderGrammar();
+        });
+    }
 
     // Theme Toggle Handler
     document.getElementById("theme-toggle-btn").addEventListener("click", toggleTheme);
@@ -483,11 +500,43 @@ function renderCurrentTab() {
 }
 
 // ==========================================================================
-// GRAMMAR RENDERING ENGINE
+// GRAMMAR RENDERING ENGINE & PROGRESS
 // ==========================================================================
+function getGrammarStatus(unit, sectionTitle) {
+    const key = `${unit}::${sectionTitle}`;
+    return grammarProgress[key] || "new";
+}
+
+function setGrammarStatus(unit, sectionTitle, status) {
+    const key = `${unit}::${sectionTitle}`;
+    grammarProgress[key] = status;
+    localStorage.setItem("jpd123_grammar_progress", JSON.stringify(grammarProgress));
+}
+
+function toggleGrammarStatusInline(badgeElement, unit, sectionTitle) {
+    const currentStatus = getGrammarStatus(unit, sectionTitle);
+    let nextStatus = "new";
+    if (currentStatus === "new") nextStatus = "learning";
+    else if (currentStatus === "learning") nextStatus = "done";
+
+    setGrammarStatus(unit, sectionTitle, nextStatus);
+
+    badgeElement.className = `grammar-status-badge status-badge ${nextStatus}`;
+    badgeElement.textContent = nextStatus === 'done' ? 'Đã thuộc' : nextStatus === 'learning' ? 'Đang học' : 'Chưa học';
+
+    showToast(`Đã lưu tiến độ ngữ pháp: ${sectionTitle}`, "done");
+
+    const statusFilter = document.getElementById("grammar-status-filter") ? document.getElementById("grammar-status-filter").value : "all";
+    if (statusFilter !== "all") {
+        renderGrammar();
+    }
+}
+
 function renderGrammar() {
     const container = document.getElementById("grammar-content");
     const filterValue = document.getElementById("grammar-unit-filter").value;
+    const statusSelect = document.getElementById("grammar-status-filter");
+    const statusFilter = statusSelect ? statusSelect.value : "all";
 
     // Filter data
     const units = filterValue === "all"
@@ -500,96 +549,115 @@ function renderGrammar() {
     }
 
     let html = '';
+    let renderedCount = 0;
 
     units.forEach(unitData => {
-        html += `<div class="grammar-unit-group">`;
-        html += `<div class="grammar-unit-header">`;
-        html += `<i class="fa-solid ${unitData.icon}"></i>`;
-        html += `<h3>📖 ${unitData.unit}: ${unitData.title}</h3>`;
-        html += `</div>`;
-
-        unitData.sections.forEach((section, sIdx) => {
-            const sectionId = `grammar-${unitData.unit.replace(/\s/g, '')}-${sIdx}`;
-            html += `<div class="grammar-item">`;
-            html += `<button class="grammar-item-toggle" data-target="${sectionId}">`;
-            html += `<span class="grammar-item-number">${sIdx + 1}</span>`;
-            html += `<span class="grammar-item-title">${section.title}</span>`;
-            html += `<i class="fa-solid fa-chevron-down grammar-chevron"></i>`;
-            html += `</button>`;
-            html += `<div class="grammar-item-body" id="${sectionId}">`;
-
-            // Structures / Formulas
-            if (section.structures && section.structures.length > 0) {
-                section.structures.forEach(s => {
-                    html += `<div class="grammar-formula-box">`;
-                    html += `<div class="grammar-formula-text">${highlightGrammarFormula(s.formula)}</div>`;
-                    if (s.explanation) {
-                        html += `<div class="grammar-formula-explain">${s.explanation}</div>`;
-                    }
-                    html += `</div>`;
-                });
-            }
-
-            // Tables
-            if (section.tables && section.tables.length > 0) {
-                section.tables.forEach(tbl => {
-                    html += `<div class="grammar-table-wrapper">`;
-                    if (tbl.caption) {
-                        html += `<div class="grammar-table-caption">${tbl.caption}</div>`;
-                    }
-                    html += `<table class="grammar-table">`;
-                    html += `<thead><tr>`;
-                    tbl.headers.forEach(h => {
-                        html += `<th>${h}</th>`;
-                    });
-                    html += `</tr></thead>`;
-                    html += `<tbody>`;
-                    tbl.rows.forEach(row => {
-                        html += `<tr>`;
-                        row.forEach(cell => {
-                            html += `<td>${highlightJapanese(cell)}</td>`;
-                        });
-                        html += `</tr>`;
-                    });
-                    html += `</tbody></table>`;
-                    html += `</div>`;
-                });
-            }
-
-            // Examples
-            if (section.examples && section.examples.length > 0) {
-                html += `<div class="grammar-examples">`;
-                html += `<div class="grammar-examples-label"><i class="fa-solid fa-lightbulb"></i> Ví dụ:</div>`;
-                section.examples.forEach(ex => {
-                    html += `<div class="grammar-example-item">`;
-                    html += `<span class="grammar-ex-jp">${ex.jp}</span>`;
-                    html += `<span class="grammar-ex-arrow">→</span>`;
-                    html += `<span class="grammar-ex-vi">${ex.vi}</span>`;
-                    html += `</div>`;
-                });
-                html += `</div>`;
-            }
-
-            // Notes
-            if (section.notes && section.notes.length > 0) {
-                section.notes.forEach(note => {
-                    const isWarning = note.startsWith('⚠️');
-                    const isTip = note.startsWith('💡');
-                    const noteClass = isWarning ? 'warning' : (isTip ? 'tip' : 'info');
-                    const noteIcon = isWarning ? 'fa-triangle-exclamation' : (isTip ? 'fa-lightbulb' : 'fa-circle-info');
-                    html += `<div class="grammar-note ${noteClass}">`;
-                    html += `<i class="fa-solid ${noteIcon}"></i>`;
-                    html += `<span>${note.replace(/^[⚠️💡]\s*/, '')}</span>`;
-                    html += `</div>`;
-                });
-            }
-
-            html += `</div>`; // grammar-item-body
-            html += `</div>`; // grammar-item
+        // Filter sections by status
+        const filteredSections = unitData.sections.filter(section => {
+            const status = getGrammarStatus(unitData.unit, section.title);
+            return statusFilter === "all" || status === statusFilter;
         });
 
-        html += `</div>`; // grammar-unit-group
+        if (filteredSections.length > 0) {
+            html += `<div class="grammar-unit-group">`;
+            html += `<div class="grammar-unit-header">`;
+            html += `<i class="fa-solid ${unitData.icon}"></i>`;
+            html += `<h3>📖 ${unitData.unit}: ${unitData.title}</h3>`;
+            html += `</div>`;
+
+            filteredSections.forEach((section, sIdx) => {
+                renderedCount++;
+                const sectionId = `grammar-${unitData.unit.replace(/\s/g, '')}-${sIdx}`;
+                const status = getGrammarStatus(unitData.unit, section.title);
+                const statusText = status === 'done' ? 'Đã thuộc' : status === 'learning' ? 'Đang học' : 'Chưa học';
+
+                html += `<div class="grammar-item">`;
+                html += `<button class="grammar-item-toggle" data-target="${sectionId}">`;
+                html += `<span class="grammar-item-number">${sIdx + 1}</span>`;
+                html += `<span class="grammar-item-title">${section.title}</span>`;
+                html += `<span class="grammar-status-badge status-badge ${status}" data-unit="${unitData.unit}" data-title="${section.title}">${statusText}</span>`;
+                html += `<i class="fa-solid fa-chevron-down grammar-chevron"></i>`;
+                html += `</button>`;
+                html += `<div class="grammar-item-body" id="${sectionId}">`;
+
+                // Structures / Formulas
+                if (section.structures && section.structures.length > 0) {
+                    section.structures.forEach(s => {
+                        html += `<div class="grammar-formula-box">`;
+                        html += `<div class="grammar-formula-text">${highlightGrammarFormula(s.formula)}</div>`;
+                        if (s.explanation) {
+                            html += `<div class="grammar-formula-explain">${s.explanation}</div>`;
+                        }
+                        html += `</div>`;
+                    });
+                }
+
+                // Tables
+                if (section.tables && section.tables.length > 0) {
+                    section.tables.forEach(tbl => {
+                        html += `<div class="grammar-table-wrapper">`;
+                        if (tbl.caption) {
+                            html += `<div class="grammar-table-caption">${tbl.caption}</div>`;
+                        }
+                        html += `<table class="grammar-table">`;
+                        html += `<thead><tr>`;
+                        tbl.headers.forEach(h => {
+                            html += `<th>${h}</th>`;
+                        });
+                        html += `</tr></thead>`;
+                        html += `<tbody>`;
+                        tbl.rows.forEach(row => {
+                            html += `<tr>`;
+                            row.forEach(cell => {
+                                html += `<td>${highlightJapanese(cell)}</td>`;
+                            });
+                            html += `</tr>`;
+                        });
+                        html += `</tbody></table>`;
+                        html += `</div>`;
+                    });
+                }
+
+                // Examples
+                if (section.examples && section.examples.length > 0) {
+                    html += `<div class="grammar-examples">`;
+                    html += `<div class="grammar-examples-label"><i class="fa-solid fa-lightbulb"></i> Ví dụ:</div>`;
+                    section.examples.forEach(ex => {
+                        html += `<div class="grammar-example-item">`;
+                        html += `<span class="grammar-ex-jp">${ex.jp}</span>`;
+                        html += `<span class="grammar-ex-arrow">→</span>`;
+                        html += `<span class="grammar-ex-vi">${ex.vi}</span>`;
+                        html += `</div>`;
+                    });
+                    html += `</div>`;
+                }
+
+                // Notes
+                if (section.notes && section.notes.length > 0) {
+                    section.notes.forEach(note => {
+                        const isWarning = note.startsWith('⚠️');
+                        const isTip = note.startsWith('💡');
+                        const noteClass = isWarning ? 'warning' : (isTip ? 'tip' : 'info');
+                        const noteIcon = isWarning ? 'fa-triangle-exclamation' : (isTip ? 'fa-lightbulb' : 'fa-circle-info');
+                        html += `<div class="grammar-note ${noteClass}">`;
+                        html += `<i class="fa-solid ${noteIcon}"></i>`;
+                        html += `<span>${note.replace(/^[⚠️💡]\s*/, '')}</span>`;
+                        html += `</div>`;
+                    });
+                }
+
+                html += `</div>`; // grammar-item-body
+                html += `</div>`; // grammar-item
+            });
+
+            html += `</div>`; // grammar-unit-group
+        }
     });
+
+    if (renderedCount === 0) {
+        container.innerHTML = `<div class="grammar-empty"><i class="fa-solid fa-book-open"></i><p>Không có điểm ngữ pháp nào theo bộ lọc này.</p></div>`;
+        return;
+    }
 
     container.innerHTML = html;
 
@@ -608,6 +676,16 @@ function renderGrammar() {
                 body.classList.add('open');
                 chevron.classList.add('rotated');
             }
+        });
+    });
+
+    // Attach status badge click listeners
+    container.querySelectorAll('.grammar-status-badge').forEach(badge => {
+        badge.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const unit = badge.getAttribute('data-unit');
+            const title = badge.getAttribute('data-title');
+            toggleGrammarStatusInline(badge, unit, title);
         });
     });
 

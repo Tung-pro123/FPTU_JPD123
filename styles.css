@@ -2121,7 +2121,14 @@ body.light-theme .theme-toggle-btn i {
 .grammar-filter {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.grammar-filter-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .grammar-filter label {
@@ -2229,6 +2236,12 @@ body.light-theme .theme-toggle-btn i {
 
 .grammar-item-title {
     flex: 1;
+}
+
+.grammar-status-badge {
+    margin-left: auto;
+    margin-right: 4px;
+    flex-shrink: 0;
 }
 
 .grammar-chevron {
