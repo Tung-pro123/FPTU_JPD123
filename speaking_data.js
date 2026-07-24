@@ -496,5 +496,113 @@ const SPEAKING_DATA = [
                 tip: "💡 むずかしい (難し - khó)"
             }
         ]
+    },
+    {
+        id: 19,
+        title: "Đề 19 (Chuyên Đề ~ています): Hành động đang Đọc, Đợi & Chụp ảnh (Nhóm 1: い/ち/り & み/び/に)",
+        questions: [
+            {
+                qJp: "はやとさんは 今、なにを していますか。",
+                qVi: "Bạn Hayato bây giờ đang làm gì vậy?",
+                aJp: "はやとさんは としょかんで ほんを よんでいます。",
+                aVi: "Bạn Hayato đang đọc sách ở thư viện.",
+                tip: "💡 Động từ Nhóm 1 (chuyển む/ぶ/ぬ ➔ んでいます): よみます (đọc) ➔ よんでいます (đang đọc)"
+            },
+            {
+                qJp: "まいさんは バスを まっていますか。",
+                qVi: "Bạn Mai đang đợi xe buýt phải không?",
+                aJp: "はい、まいさんは えきで バスを まっています。",
+                aVi: "Vâng, bạn Mai đang đợi xe buýt ở nhà ga.",
+                tip: "💡 Động từ Nhóm 1 (chuyển い/ち/り ➔ っています): まちます (đợi) ➔ まっています (đang đợi)"
+            },
+            {
+                qJp: "〜さんは 今、しゃしんを とっていますか。",
+                qVi: "Bây giờ bạn đang chụp ảnh phải không?",
+                aJp: "いいえ、しゃしんを とっていません。日本語を べんきょうしています。",
+                aVi: "Không, tôi không đang chụp ảnh. Tôi đang học tiếng Nhật.",
+                tip: "💡 Phủ định của tiếp diễn: ~ていません (Không đang làm). とります ➔ とっていません"
+            }
+        ]
+    },
+    {
+        id: 20,
+        title: "Đề 20 (Chuyên Đề ~ています): Hành động đang Viết, Nghe & Bơi (Nhóm 1: き/ぎ/し)",
+        questions: [
+            {
+                qJp: "たなかさんは なにを していますか。",
+                qVi: "Bạn Tanaka đang làm gì vậy?",
+                aJp: "たなかさんは てがみを かいています。",
+                aVi: "Bạn Tanaka đang viết thư.",
+                tip: "💡 Động từ Nhóm 1 (chuyển き ➔ いています): かきます (viết) ➔ かいています (đang viết)"
+            },
+            {
+                qJp: "すずきさんは おんがくを きいていますか。",
+                qVi: "Bạn Suzuki đang nghe nhạc phải không?",
+                aJp: "はい、すずきさんは おんがくを きいています。",
+                aVi: "Vâng, bạn Suzuki đang nghe nhạc.",
+                tip: "💡 Động từ Nhóm 1 (chuyển き ➔ いています): ききます (nghe) ➔ きいています (đang nghe)"
+            },
+            {
+                qJp: "けんさんは プールで およいでいますか。",
+                qVi: "Bạn Ken đang bơi ở hồ bơi phải không?",
+                aJp: "はい、けんさんは プールで およいでいます。",
+                aVi: "Vâng, bạn Ken đang bơi ở hồ bơi.",
+                tip: "💡 Động từ Nhóm 1 (chuyển ぎ ➔ いでいます): およぎます (bơi) ➔ およいでいます (đang bơi)"
+            }
+        ]
+    },
+    {
+        id: 21,
+        title: "Đề 21 (Chuyên Đề ~ています): Hành động đang Xem, Ăn, Học & Nói chuyện (Nhóm 2 & Nhóm 3)",
+        questions: [
+            {
+                qJp: "りんにさんは 今、テレビを みていますか。",
+                qVi: "Bạn Rini bây giờ đang xem TV phải không?",
+                aJp: "いいえ、テレビを みていません。ごはんを たべています。",
+                aVi: "Không, bạn ấy không đang xem TV. Bạn ấy đang ăn cơm.",
+                tip: "💡 Động từ Nhóm 2 (bỏ ます + ています): みます ➔ みています (đang xem), たべます ➔ たべています (đang ăn)"
+            },
+            {
+                qJp: "〜さんは 今、日本語を べんきょうしていますか。",
+                qVi: "Bây giờ bạn đang học tiếng Nhật phải không?",
+                aJp: "はい、日本語を べんきょうしています。",
+                aVi: "Vâng, tôi đang học tiếng Nhật.",
+                tip: "💡 Động từ Nhóm 3 (します ➔ しています): べんきょうします ➔ べんきょうしています (đang học)"
+            },
+            {
+                qJp: "やまとさんは なにを していますか。",
+                qVi: "Bạn Yamato đang làm gì vậy?",
+                aJp: "やまとさんは ともだちと はなしています。",
+                aVi: "Bạn Yamato đang nói chuyện với bạn bè.",
+                tip: "💡 Động từ Nhóm 1 (し ➔ しています): はなします (nói chuyện) ➔ はなしています (đang nói chuyện)"
+            }
+        ]
+    },
+    {
+        id: 22,
+        title: "Đề 22 (Chuyên Đề ~ています): Tổng hợp Hỏi Ai đang làm gì ở đâu?",
+        questions: [
+            {
+                qJp: "きょうしつで だれが 日本語を おしえていますか。",
+                qVi: "Ai đang dạy tiếng Nhật ở trong lớp học?",
+                aJp: "せんせいが きょうしつで 日本語を おしえています。",
+                aVi: "Thầy/Cô giáo đang dạy tiếng Nhật trong lớp học.",
+                tip: "💡 Động từ Nhóm 2: おしえます (dạy) ➔ おしえています (đang dạy)"
+            },
+            {
+                qJp: "ともだちは 今、どこで なにを していますか。",
+                qVi: "Bạn của bạn bây giờ đang làm gì ở đâu?",
+                aJp: "としょかんで ほんを かりています。",
+                aVi: "Đang mượn sách ở thư viện.",
+                tip: "💡 Động từ Nhóm 2: かります (mượn) ➔ かりています (đang mượn). Cấu trúc: [Địa điểm] で [Mục đích] を しています"
+            },
+            {
+                qJp: "〜さんは 今、えきで ともだちを まっていますか。",
+                qVi: "Bây giờ bạn đang đợi bạn bè ở nhà ga phải không?",
+                aJp: "はい、えきで ともだちを まっています。",
+                aVi: "Vâng, tôi đang đợi bạn ở nhà ga.",
+                tip: "💡 Cấu trúc tổng hợp tiếp diễn địa điểm: [Địa điểm] で [N] を [V-ています]"
+            }
+        ]
     }
 ];
