@@ -499,7 +499,7 @@ const SPEAKING_DATA = [
     },
     {
         id: 19,
-        title: "Đề 19 (Chuyên Đề ~ています): Hành động đang Đọc, Đợi & Chụp ảnh (Nhóm 1: い/ち/り & み/び/に)",
+        title: "Đề 19 (Chuyên Đề ~ています): Hành động đang Đọc, Mua & Chụp ảnh (Nhóm 1: い/ち/り & み/び/に)",
         questions: [
             {
                 qJp: "はやとさんは 今、なにを していますか。",
@@ -509,11 +509,11 @@ const SPEAKING_DATA = [
                 tip: "💡 Động từ Nhóm 1 (chuyển む/ぶ/ぬ ➔ んでいます): よみます (đọc) ➔ よんでいます (đang đọc)"
             },
             {
-                qJp: "まいさんは バスを まっていますか。",
-                qVi: "Bạn Mai đang đợi xe buýt phải không?",
-                aJp: "はい、まいさんは えきで バスを まっています。",
-                aVi: "Vâng, bạn Mai đang đợi xe buýt ở nhà ga.",
-                tip: "💡 Động từ Nhóm 1 (chuyển い/ち/り ➔ っています): まちます (đợi) ➔ まっています (đang đợi)"
+                qJp: "まいさんは パンを かっていますか。",
+                qVi: "Bạn Mai đang mua bánh mì phải không?",
+                aJp: "はい、まいさんは スーパーで パンを かっています。",
+                aVi: "Vâng, bạn Mai đang mua bánh mì ở siêu thị.",
+                tip: "💡 Động từ Nhóm 1 (chuyển い/ち/り ➔ っています): かいます (mua) ➔ かっています (đang mua)"
             },
             {
                 qJp: "〜さんは 今、しゃしんを とっていますか。",
@@ -597,11 +597,11 @@ const SPEAKING_DATA = [
                 tip: "💡 Động từ Nhóm 2: かります (mượn) ➔ かりています (đang mượn). Cấu trúc: [Địa điểm] で [Mục đích] を しています"
             },
             {
-                qJp: "〜さんは 今、えきで ともだちを まっていますか。",
-                qVi: "Bây giờ bạn đang đợi bạn bè ở nhà ga phải không?",
-                aJp: "はい、えきで ともだちを まっています。",
-                aVi: "Vâng, tôi đang đợi bạn ở nhà ga.",
-                tip: "💡 Cấu trúc tổng hợp tiếp diễn địa điểm: [Địa điểm] で [N] を [V-ています]"
+                qJp: "〜さんは 今、えきで ともだちと あっていますか。",
+                qVi: "Bây giờ bạn đang gặp bạn bè ở nhà ga phải me?",
+                aJp: "はい、えきで ともだちと あっています。",
+                aVi: "Vâng, tôi đang gặp bạn ở nhà ga.",
+                tip: "💡 Động từ Nhóm 1 (い ➔ っています): あいます (gặp) ➔ あっています (đang gặp). Cấu trúc: [Địa điểm] で [Người] と [V-ています]"
             }
         ]
     }
